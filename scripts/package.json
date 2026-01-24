@@ -1,0 +1,12 @@
+﻿{
+  "name": "shark-method-scripts",
+  "version": "2.0.0",
+  "description": "Scripts auxiliares do Método S.H.A.R.K.",
+  "main": "shark-status.js",
+  "scripts": {
+    "status": "node shark-status.js"
+  },
+  "keywords": ["shark", "development", "agents"],
+  "author": "Victor Lima",
+  "license": "MIT"
+}

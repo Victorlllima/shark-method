@@ -18,23 +18,23 @@ Este arquivo define todos os comandos reconhecidos pelo sistema S.H.A.R.K.
 
 ## COMANDOS DE ATIVAÇÃO DE AGENTES
 
-### shiva, go!
-- **Aliases:** `shiva go`, `ativar shiva`, `/shiva-start`
+### shiva
+- **Aliases:** `shiva go`, `ativar shiva`, `/shiva-start`, `shiva, go!`
 - **Ação:** Carregar `~/.gemini/agents/shiva.md`
 - **Descrição:** Ativa SHIVA para especificação de produto
 
-### hades, go!
-- **Aliases:** `hades go`, `ativar hades`, `/hades-start`
+### hades
+- **Aliases:** `hades go`, `ativar hades`, `/hades-start`, `hades, go!`
 - **Ação:** Carregar `~/.gemini/agents/hades.md`
 - **Descrição:** Ativa HADES para planejamento técnico
 
-### ravena, go!
-- **Aliases:** `ravena go`, `ativar ravena`, `/ravena-start`
+### ravena
+- **Aliases:** `ravena go`, `ativar ravena`, `/ravena-start`, `ravena, go!`
 - **Ação:** Carregar `~/.gemini/agents/ravena.md`
 - **Descrição:** Ativa RAVENA para testes e QA
 
-### kerberos, go!
-- **Aliases:** `kerberos go`, `ativar kerberos`, `/kerberos-start`
+### kerberos
+- **Aliases:** `kerberos go`, `ativar kerberos`, `/kerberos-start`, `kerberos, go!`
 - **Ação:** Carregar `~/.gemini/agents/kerberos.md`
 - **Descrição:** Ativa KERBEROS para auditoria de segurança
 

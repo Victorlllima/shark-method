@@ -60,12 +60,12 @@ Sistema de desenvolvimento com 5 agentes especializados que trabalham em equipe 
 
 ## COMANDOS DISPONÍVEIS
 
-- `shark ajuda` - Esta ajuda
+- `shiva` - Ativar Shiva (especificação)
+- `hades` - Ativar Hades (implementação)
+- `ravena` - Ativar Ravena (testes)
+- `kerberos` - Ativar Kerberos (segurança)
 - `shark status` - Status do projeto atual
-- `shiva, go!` - Ativar Shiva (especificação)
-- `hades, go!` - Ativar Hades (implementação)
-- `ravena, go!` - Ativar Ravena (testes)
-- `kerberos, go!` - Ativar Kerberos (segurança)
+- `shark ajuda` - Esta ajuda
 
 ---
 

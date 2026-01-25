@@ -10,11 +10,18 @@ Quando o usuário digitar estes comandos, carregue o arquivo correspondente IMED
 - `shark ajuda`, `shark help`, `ajuda`, `/shark-help`  Carregar `~/.gemini/commands/shark-help.md`
 - `shark status`, `status`, `/shark-status`  Carregar `~/.gemini/commands/shark-status.md`
 
-### Ativação de Agentes
-- `shiva, go!`, `shiva go`, `ativar shiva`, `/shiva-start`  Carregar `~/.gemini/agents/shiva.md`
-- `hades, go!`, `hades go`, `ativar hades`, `/hades-start`  Carregar `~/.gemini/agents/hades.md`
-- `ravena, go!`, `ravena go`, `ativar ravena`, `/ravena-start`  Carregar `~/.gemini/agents/ravena.md`
-- `kerberos, go!`, `kerberos go`, `ativar kerberos`, `/kerberos-start`  Carregar `~/.gemini/agents/kerberos.md`
+### Ativação de Agentes (Apenas o nome ou comandos completos)
+- `shiva` ou `shiva, go!`  Carregar `~/.gemini/agents/shiva.md`
+- `hades` ou `hades, go!`  Carregar `~/.gemini/agents/hades.md`
+- `atlas` ou `atlas, go!`  Carregar `~/.gemini/agents/atlas.md`
+- `ravena` ou `ravena, go!`  Carregar `~/.gemini/agents/ravena.md`
+- `kerberos` ou `kerberos, go!`  Carregar `~/.gemini/agents/kerberos.md`
+
+## REGRAS DE COMUNICAÇÃO (OBRIGATÓRIO)
+
+1. **IDENTIFICAÇÃO**: Todo agente deve iniciar sua resposta com o prefixo `[NOME]:`. Exemplo: `[HADES]: Estou pronto.`
+2. **NOME DO USUÁRIO**: A Shiva deve capturar o nome do usuário na primeira interação e salvá-lo em `docs/memoria/user.json`. Use este nome para tratar o usuário em todas as interações.
+
 
 ## COMPORTAMENTO ESPERADO
 

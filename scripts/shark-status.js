@@ -56,6 +56,37 @@ function getStatus() {
   const blockersMatch = content.match(/\*\*Bloqueios Atuais:\*\*([\s\S]*?)(?=\n\*\*Pendências|\n---|\n##|$)/);
   const blockers = blockersMatch ? blockersMatch[1].trim().split('\n').filter(l => l.trim()) : [];
   
+  const totalPhases = phases.length;
+  const completedPhases = phases.filter(p => p.percentage === 100).length;
+  
+  // Gerar Dashboard Visual
+  console.log(`\n🦈 MÉTODO S.H.A.R.K. - DASHBOARD DE STATUS`);
+  console.log(`==========================================`);
+  console.log(`📂 PROJETO: ${projectName}`);
+  console.log(`📅 ÚLTIMA ATUALIZAÇÃO: ${lastUpdate}`);
+  console.log(`\n📍 ROADMAP`);
+  
+  phases.forEach(p => {
+    const barLength = 20;
+    const filled = Math.round((p.percentage / 100) * barLength);
+    const bar = '█'.repeat(filled) + '░'.repeat(barLength - filled);
+    const emoji = p.percentage === 100 ? '✅' : (p.percentage > 0 ? '🔄' : '⏳');
+    console.log(`${emoji} FASE ${p.number}: ${p.name.padEnd(30)} [${bar}] ${p.percentage}%`);
+  });
+
+  if (lastSession) {
+    console.log(`\n🕒 ÚLTIMA SESSÃO (${lastSession.date})`);
+    console.log(`➖ Trabalho: ${lastSession.work[0] || 'Nenhum'}`);
+    console.log(`➖ Próximo: ${lastSession.next[0] || 'Nenhum'}`);
+  }
+
+  if (blockers.length > 0) {
+    console.log(`\n🚨 BLOQUEIOS:`);
+    blockers.forEach(b => console.log(`  - ${b}`));
+  }
+
+  console.log(`\n==========================================`);
+  
   return {
     exists: true,
     projectName,
@@ -63,16 +94,12 @@ function getStatus() {
     phases,
     lastSession,
     pending,
-    blockers,
-    totalPhases: phases.length,
-    completedPhases: phases.filter(p => p.percentage === 100).length,
-    currentPhase: phases.find(p => p.percentage > 0 && p.percentage < 100)
+    blockers
   };
 }
 
 if (require.main === module) {
   const status = getStatus();
-  console.log(JSON.stringify(status, null, 2));
 }
 
 module.exports = { getStatus };

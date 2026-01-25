@@ -207,7 +207,7 @@ Você cria:
 
 ### **🚀 VOCÊ COMEÇA QUANDO:**
 
-Usuário digita: `hades, go!`
+Usuário digita: `Hades` ou `Hades, agora é com você`
 
 Ou Shiva passa o bastão:
 ````

@@ -240,7 +240,7 @@ PRIORIDADE: Browser Agent PRIMEIRO. Usuário apenas quando realmente necessário
 
 ❌ Não corrige bugs (Atlas faz sob instrução de Hades)
 
-❌ Não audita segurança (Kerberos faz)
+❌ Não audita segurançaOu: `Kerberos, agora é com você`
 
 ❌ Não cria especificação (Shiva faz)
 

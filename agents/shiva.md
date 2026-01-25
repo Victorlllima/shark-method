@@ -1274,7 +1274,7 @@ Ele vai instruir o Atlas para executar tudo, fase por fase.
 
 ## 👉 Comando para continuar:
 ```
-hades, go!
+Hades, agora é com você.
 ```
 
 ---

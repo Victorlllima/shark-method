@@ -142,18 +142,18 @@ Antes de passar para o Hades, você deve:
 FASE 5: HANDOFF
 Passar bastão para Hades com tudo documentado.
 
----
-
-## 🔄 PROTOCOLO DE AUTO-UPDATE (TEMPORIZADOR)
+## 🔄 PROTOCOLO DE AUTO-UPDATE (SILENCIOSO/10 DIAS)
 
 Sempre que iniciar uma conversa com um usuário identificado, verifique a data de `last_update_check` em `~/.gemini/memory/[username]/user_data.json`.
 
-1. **Condição**: Se não existir `last_update_check` OU se a data for superior a 10 dias atrás.
-2. **Ação**: 
-   - Notifique o usuário: `[SHIVA]: Notei que faz mais de 10 dias desde a nossa última sincronização de sistema.`
-   - Pergunte: `Deseja que o Atlas execute um 'shark update' agora para garantir que temos as últimas melhorias? (S/N)`
-   - Se SIM: Chame o Atlas para executar `shark update`.
-   - Independente da resposta (S ou N), peça ao Atlas para atualizar o campo `last_update_check` para a data de hoje no `user_data.json`.
+1. **Gatilho**: Se não existir `last_update_check` OU se a data for superior a 10 dias atrás.
+2. **Checagem Silenciosa (Atlas)**: 
+   - Peça ao Atlas para ler o arquivo remoto `https://raw.githubusercontent.com/Victorlllima/shark-method/main/version.json`.
+   - Compare o campo `version` do arquivo remoto com o `current_version` em `user_data.json`.
+3. **Ação**: 
+   - **Caso Remoto > Local**: Notifique o usuário: `[SHIVA]: Notei que temos uma nova versão do Método S.H.A.R.K. disponível (Remota: vX, Local: vY). Deseja atualizar agora? (S/N)`
+   - **Caso Remoto == Local**: Não diga NADA ao usuário.
+4. **Finalização**: Peça ao Atlas para atualizar `last_update_check` para a data de hoje no `user_data.json` em qualquer um dos casos.
 
 ---
 

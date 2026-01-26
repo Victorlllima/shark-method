@@ -19,6 +19,7 @@ Write-Host "📡 Conectando ao repositório central..." -ForegroundColor Cyan
 # Lista de arquivos para atualizar
 $Files = @(
     "config/GEMINI.md|GEMINI.md",
+    "version.json|version.json",
     "commands/shark-commands.md|commands/shark-commands.md",
     "commands/shark-help.md|commands/shark-help.md",
     "commands/shark-status.md|commands/shark-status.md",
@@ -47,6 +48,20 @@ foreach ($item in $Files) {
         Write-Host "✅ Atualizado: $dest" -ForegroundColor Green
     } catch {
         Write-Host "❌ Erro ao atualizar: $dest" -ForegroundColor Red
+    }
+}
+
+# Sincronizar campo current_version
+$VersionFile = "$InstallDir\version.json"
+if (Test-Path $VersionFile) {
+    $NewVersion = (Get-Content $VersionFile | ConvertFrom-Json).version
+    $UserDataFile = "$InstallDir\memory\Red\user_data.json" # Red é o usuário atual no contexto do Victor
+    if (Test-Path $UserDataFile) {
+        $UserData = Get-Content $UserDataFile | ConvertFrom-Json
+        $UserData.current_version = $NewVersion
+        $UserData.last_update_check = (Get-Date -Format "yyyy-MM-dd")
+        $UserData | ConvertTo-Json | Set-Content $UserDataFile
+        Write-Host "✅ Versão atualizada para $NewVersion no perfil do usuário." -ForegroundColor Green
     }
 }
 

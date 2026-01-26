@@ -50,6 +50,7 @@ function Download-File {
 }
 
 Download-File "$RepoUrl/config/GEMINI.md" "$InstallDir\GEMINI.md"
+Download-File "$RepoUrl/version.json" "$InstallDir\version.json"
 Download-File "$RepoUrl/commands/shark-commands.md" "$InstallDir\commands\shark-commands.md"
 Download-File "$RepoUrl/commands/shark-help.md" "$InstallDir\commands\shark-help.md"
 Download-File "$RepoUrl/commands/shark-status.md" "$InstallDir\commands\shark-status.md"

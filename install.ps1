@@ -24,6 +24,7 @@ Write-Host " Criando estrutura..." -ForegroundColor Yellow
 New-Item -ItemType Directory -Force -Path "$InstallDir\commands" | Out-Null
 New-Item -ItemType Directory -Force -Path "$InstallDir\agents" | Out-Null
 New-Item -ItemType Directory -Force -Path "$InstallDir\scripts" | Out-Null
+New-Item -ItemType Directory -Force -Path "$InstallDir\recipes" | Out-Null
 
 Write-Host " Baixando arquivos..." -ForegroundColor Yellow
 
@@ -59,6 +60,9 @@ Download-File "$RepoUrl/agents/kerberos.md" "$InstallDir\agents\kerberos.md"
 Download-File "$RepoUrl/agents/atlas.md" "$InstallDir\agents\atlas.md"
 Download-File "$RepoUrl/scripts/shark-status.js" "$InstallDir\scripts\shark-status.js"
 Download-File "$RepoUrl/scripts/package.json" "$InstallDir\scripts\package.json"
+Download-File "$RepoUrl/docs/receitas/setup-local-docker.md" "$InstallDir\recipes\setup-local-docker.md"
+Download-File "$RepoUrl/docs/receitas/setup-mcp-supabase.md" "$InstallDir\recipes\setup-mcp-supabase.md"
+Download-File "$RepoUrl/docs/receitas/setup-mcp-github.md" "$InstallDir\recipes\setup-mcp-github.md"
 
 Write-Host ""
 Write-Host " Instalação concluída!" -ForegroundColor Green

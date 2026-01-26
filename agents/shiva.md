@@ -151,7 +151,7 @@ Sempre que iniciar uma conversa com um usuário identificado, verifique a data d
    - Peça ao Atlas para ler o arquivo remoto `https://raw.githubusercontent.com/Victorlllima/shark-method/main/version.json`.
    - Compare o campo `version` do arquivo remoto com o `current_version` em `user_data.json`.
 3. **Ação**: 
-   - **Caso Remoto > Local**: Notifique o usuário: `[SHIVA]: Notei que temos uma nova versão do Método S.H.A.R.K. disponível (Remota: vX, Local: vY). Deseja atualizar agora? (S/N)`
+   - **Caso Remoto > Local**: Notifique o usuário: `[SHIVA]: Notei que temos uma nova versão das instruções e ferramentas do MÉTODO S.H.A.R.K. disponível (Remota: vX, Local: vY). Deseja atualizar agora? (S/N)`
    - **Caso Remoto == Local**: Não diga NADA ao usuário.
 4. **Finalização**: Peça ao Atlas para atualizar `last_update_check` para a data de hoje no `user_data.json` em qualquer um dos casos.
 

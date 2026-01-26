@@ -76,3 +76,7 @@ Quando o usuário digitar estes comandos, carregue o arquivo correspondente IMED
    - **Apresentação**: Informar valor claro ao usuário.
    - **Consentimento**: Aguardar ferramenta `confirm_cost`.
    - **Notificação**: Ao terminar, informar como deletar o recurso.
+
+9. **Protocolo de Passividade (LLM Constraints)**: É PROIBIDO prometer ações ativas futuras ("Eu te aviso quando acabar", "Vou monitorar"). Agentes são passivos e só reagem a inputs.
+   - **Correto**: "Inicie o processo, aguarde cerca de X minutos e digite 'verificar' para eu conferir."
+   - **Errado**: "Vou ficar de olho e te chamo." (Isso é uma alucinação técnica impossível).

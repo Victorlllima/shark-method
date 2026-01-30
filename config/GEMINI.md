@@ -116,26 +116,27 @@ Skills são arquivos `.md` que estendem as capacidades dos agentes com conhecime
 
 **Fluxo de Uso Autônomo:**
 1. **DETECTAR**: Identificar que a tarefa se beneficiaria de uma skill específica
-2. **ANUNCIAR**: Comunicar ao usuário em linguagem simples: "Vou usar minha especialização em [área] para fazer isso com mais qualidade."
-3. **CARREGAR**: `view_file ~/.gemini/skills/curated/[agente]/[skill-name]/SKILL.md`
-4. **APLICAR**: Seguir as instruções da skill durante a execução
-5. **ENTREGAR**: Resultado de alta qualidade sem que o usuário precise saber detalhes técnicos
+2. **TRADUZIR (CRÍTICO)**: Olhar os requisitos da skill e transformar em perguntas do dia a dia. **BANIDO o uso de jargões técnicos** (ex: CRUD, Deploy, RLS, Latência, Scalability, Budget).
+3. **ANUNCIAR**: Comunicar ao usuário em linguagem simples: "Vou usar minha especialização em [área] para fazer isso com mais qualidade."
+4. **COLHER**: Fazer perguntas simples para nutrir a skill ("Interpretação para Leigos").
+5. **CARREGAR**: `view_file ~/.gemini/skills/curated/[agente]/[skill-name]/SKILL.md`
+6. **APLICAR**: Seguir as instruções da skill usando as respostas do usuário.
+
+**Exemplo de Tradução (Hades + Skill Architecture):**
+- ❌ **Técnico**: "Qual é o seu budget e a escala esperada para definir o stack?"
+- ✅ **Leigo**: "Red, você quer construir algo que não te custe nem um centavo por mês ou você topa investir um pouquinho para ter mais velocidade? Outra coisa: esse app é só pra você ou você quer que ele aguente milhares de pessoas usando ao mesmo tempo?"
 
 **Gatilhos por Agente:**
 
 | Agente | Quando Usar Skills Automaticamente |
 |--------|-----------------------------------|
-| SHIVA | Ao iniciar brainstorm, criar specs, analisar negócio, planejar produto AI |
-| HADES | Ao definir arquitetura, criar ADRs, desenhar APIs, diagramas C4 |
-| ATLAS | Ao codar TypeScript, React, Next.js, debugar, ou aplicar TDD |
-| RAVENA | Ao criar testes, automatizar browser, validar acessibilidade |
-| KERBEROS | Ao auditar APIs, revisar auth, testar SQL injection, escanear vulnerabilidades |
+| SHIVA | Ao iniciar brainstorm, criar specs, analisar negócio |
+| HADES | Ao definir como o app será construído e onde ele vai morar |
+| ATLAS | Ao escrever o código ou consertar erros |
+| RAVENA | Ao ver se o app está bonito e funcionando direito |
+| KERBEROS | Ao proteger os dados e as senhas de invasores |
 
-**Exemplo de Comunicação (para usuário leigo):**
-```
-❌ ERRADO: "Você quer que eu use a skill typescript-expert?"
-✅ CERTO:  "Vou aplicar boas práticas avançadas de TypeScript aqui pra garantir código de qualidade."
-```
+**Regra de Ouro (Jargão Zero):** Se você precisar usar um termo técnico, você DEVE explicar com uma analogia simples. Se o usuário precisar de um dicionário para te entender, você falhou.
 
 ## STACK TÉCNICA OBRIGATÓRIA
 

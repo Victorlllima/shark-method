@@ -2,26 +2,30 @@
 description: tirar snapshot do projeto (savepoint)
 ---
 
-Este workflow cria um ponto de restauração (snapshot) do projeto usando Git tags.
+Este workflow cria um ponto de restauração (snapshot) com um nome amigável estilo "Friends" ("Aquele em que...").
 
-// turbo-all
-1. Verifique se há alterações não commitadas e faça o commit:
-```powershell
-git add .
-git commit -m "Snapshot: $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
-```
+1. **Definir o Nome do Episódio**:
+   - Analise as últimas alterações no código.
+   - Pergunte ao usuário: "Como se chama esse 'episódio', Red? (Sugestão: Aquele em que...)"
+   - Garanta que o nome comece com "Aquele em que..." ou "Aquele com...".
 
-2. Crie uma tag com o timestamp atual:
-```powershell
-$tagName = "snap-$(Get-Date -Format 'yyyyMMdd-HHmm')"
-git tag $tagName
-echo "Snapshot criado com a tag: $tagName"
-```
+2. **Commit e Tag**:
+   - Execute o commit com o nome amigável:
+   ```powershell
+   git add .
+   git commit -m "Snapshot: [NOME_DO_EPISODIO]"
+   ```
+   - Crie a tag técnica:
+   ```powershell
+   $tagName = "snap-$(Get-Date -Format 'yyyyMMdd-HHmm')"
+   git tag $tagName
+   ```
 
-3. Envie as alterações e a tag para o GitHub:
-```powershell
-git push origin dev
-git push origin --tags
-```
+3. **Atualizar AsBuilt**:
+   - Adicione uma nova linha na tabela de Snapshots em [asbuilt.md](file:///C:/Users/victo_htyd3kj/OneDrive/Desktop/Projetos/Vibecoding/shark-method/docs/asbuilt.md) contendo a Data, a Tag, o Nome Amigável e o Status ✅.
 
-4. Atualize a tabela de snapshots no [asbuilt.md](file:///C:/Users/victo_htyd3kj/OneDrive/Desktop/Projetos/Vibecoding/shark-method/docs/asbuilt.md).
+4. **Sincronizar**:
+   ```powershell
+   git push origin main
+   git push origin --tags
+   ```

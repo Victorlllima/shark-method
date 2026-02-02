@@ -2,23 +2,25 @@
 description: restaurar snapshot do projeto (voltar savepoint)
 ---
 
-Este workflow restaura o projeto para um estado anterior usando uma Git tag.
+Este workflow restaura o projeto usando a lista amigável de snapshots.
 
-// turbo-all
-1. Liste os snapshots disponíveis:
-```powershell
-git tag -l "snap-*"
-```
+1. **Listar Episódios**:
+   - Leia o arquivo [asbuilt.md](file:///C:/Users/victo_htyd3kj/OneDrive/Desktop/Projetos/Vibecoding/shark-method/docs/asbuilt.md).
+   - Mostre ao usuário a lista de snapshots disponíveis com seus nomes amigáveis (ex: "1. snap-xxxx: Aquele em que...").
+   - Pergunte: "Qual episódio você deseja reviver, Red?"
 
-2. Pergunte qual tag restaurar (ex: snap-20260202-0900) e faça o checkout:
-```powershell
-git checkout [TAG_NOME]
-```
+2. **Restaurar**:
+   - Após a escolha, execute:
+   ```powershell
+   git checkout [TAG_ESCOLHIDA]
+   git checkout . # Garante que os arquivos reflitam o estado da tag
+   ```
 
-3. Se houver mudanças no banco de dados, aplique as migrations correspondentes:
-```powershell
-npx supabase db reset
-```
+3. **Ajustar Banco (se necessário)**:
+   - Se o projeto usar Supabase e houver migrations, ofereça rodar:
+   ```powershell
+   npx supabase db reset
+   ```
 
-> [!WARNING]
-> Restaurar um snapshot mudará os arquivos locais. Certifique-se de que não tem trabalhos importantes não salvos.
+> [!CAUTION]
+> Ao voltar em um episódio, mudanças não salvas no estado atual serão perdidas!

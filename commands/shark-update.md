@@ -32,7 +32,8 @@ $Files = @(
     "scripts/package.json|scripts/package.json",
     "docs/receitas/setup-local-docker.md|recipes/setup-local-docker.md",
     "docs/receitas/setup-mcp-supabase.md|recipes/setup-mcp-supabase.md",
-    "docs/receitas/setup-mcp-github.md|recipes/setup-mcp-github.md"
+    "docs/receitas/setup-mcp-github.md|recipes/setup-mcp-github.md",
+    "docs/receitas/sistema-de-snapshots.md|recipes/sistema-de-snapshots.md"
 )
 
 foreach ($item in $Files) {

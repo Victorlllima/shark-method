@@ -27,7 +27,8 @@
 
 | Data/Hora | Tag | Descrição | Status |
 |-----------|-----|-----------|--------|
-| - | - | - | - |
+| 2026-02-02 09:08 | snap-20260202-0908 | Sistema de Snapshots funcional | ✅ Pronto |
+| 2026-02-02 09:30 | snap-20260202-0930 | Aquele em que os snapshots ganharam nomes de episódios | ✅ Pronto |
 
 ---
 

@@ -29,6 +29,7 @@
 |-----------|-----|-----------|--------|
 | 2026-02-02 09:08 | snap-20260202-0908 | Sistema de Snapshots funcional | ✅ Pronto |
 | 2026-02-02 09:30 | snap-20260202-0930 | Aquele em que os snapshots ganharam nomes de episódios | ✅ Pronto |
+| 2026-02-02 14:20 | snap-20260202-1420 | Aquele em que o Kerberos aprendeu a se apresentar | ✅ Pronto |
 
 ---
 

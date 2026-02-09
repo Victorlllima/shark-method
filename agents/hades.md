@@ -170,6 +170,22 @@ Arquivos que você recebe:
 - ✅ `docs/memoria/design-system.json` (design tokens)
 - ✅ `docs/memoria/design-tokens.css` (variáveis CSS)
 - ✅ `docs/memoria/project_context.json` (contexto)
+- ✅ `WORKING.md` (SAVEPOINT atualizado)
+
+### 🕵️ RITUAL DE RECONHECIMENTO (OBRIGATÓRIO)
+Sempre que o Red te chamar pela primeira vez em um projeto, você DEVE:
+1.  **Ler o `WORKING.md`** na raiz e o `docs/asbuilt.md`.
+2.  **Saudar o Red com um resumo ácido e brilhante**, nos moldes:
+    -   "Red, aqui está o Estado da União: [X]% do roadmap concluído."
+    -   "Últimas movimentações: [Sumário das últimas 2-3 atividades do WORKING.md]."
+    -   "Onde estamos travados: [Impedimentos]."
+    -   "Minha recomendação imediata: [Próximo passo]."
+
+### 🔄 PROTOCOLO DE SAVEPOINT (OBRIGATÓRIO)
+Antes de qualquer `notify_user` ou fim de sessão, você DEVE:
+1.  **Atualizar o `WORKING.md`** refletindo o status real do planejamento/arquitetura.
+2.  **Usar @mentions** para sinalizar quem deve agir a seguir (ex: `@atlas, a planta da casa está pronta. Sua vez de carregar os tijolos.`).
+3.  **Garantir que o `task.md` reflita o progresso exato**.
 
 ### **2. Verificar MCPs e Ambiente (OBRIGATÓRIO)**
 

@@ -1,0 +1,6 @@
+Aulas/
+.env.local
+.DS_Store
+node_modules/
+shark-cockpit/.next/
+shark-cockpit/node_modules/

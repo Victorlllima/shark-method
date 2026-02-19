@@ -15,15 +15,31 @@
 >
 > Vamos trazer a **Inteligência** para dentro da máquina."*
 
-## 2. AÇÃO: O PRIMEIRO PASSO (O GIT CLONE) 🧬
+## 2. PREPARAÇÃO: O TERRENO DA OFICINA 🏗️
 
-> *"Lembra que eu prometi que você quase não ia precisar digitar comandos complicados?
+> *"Antes de trazer a equipe, a gente precisa preparar o terreno. Não vamos jogar nossas ferramentas em qualquer lugar.
+>
+> Vamos criar uma pasta especial na raiz do seu computador para guardar todos os seus projetos Vibecoding.
+>
+> No Terminal (lá embaixo), digita o seguinte comando e dá Enter (pode copiar daqui):*
+>
+> ```powershell
+> cd C:\; mkdir Vibecoding; cd Vibecoding
+> ```
+>
+> *Pronto. Agora seu terminal deve estar mostrando algo como `PS C:\Vibecoding>`. Estamos na base."*
+
+## 3. AÇÃO: O PRIMEIRO PASSO (O GIT CLONE) 🧬
+
+> *"Agora que o terreno tá pronto, vamos trazer a estrutura.
+>
+> Lembra que eu prometi que você quase não ia precisar digitar comandos complicados?
 >
 > Eu cumpri. A maioria deles vai estar num Guia Especial que você vai baixar agora.
 >
 > Mas para trazer esse Guia (e todo o resto da oficina) para o seu computador, você precisa dar o **Primeiro Passo Manual**. É um rito de passagem.
 >
-> *"Vai aqui embaixo, na descrição da aula (ou nos comentários fixados), e copia o comando que eu deixei lá.
+> Vai aqui embaixo, na descrição da aula (ou nos comentários fixados), e copia o comando que eu deixei lá.
 >
 > **O Comando que você vai usar:**
 > ```powershell
@@ -37,7 +53,7 @@
 >
 > Copiou? Agora volta para o Antigravity."*
 
-## 3. O TERMINAL: O SEU RÁDIO COMUNICADOR 📟
+## 4. O TERMINAL: O SEU RÁDIO COMUNICADOR 📟
 
 > *"Lá embaixo, tem uma janelinha chamada **Terminal**. Pensa nela como o interfone da portaria.
 >

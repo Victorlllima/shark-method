@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 260 25% 11%; /* #1e1333 - Dark Purple bg */
+    --foreground: 210 40% 98%;
+
+    --card: 260 25% 15%;
+    --card-foreground: 210 40% 98%;
+ 
+    --popover: 260 25% 15%;
+    --popover-foreground: 210 40% 98%;
+ 
+    --primary: 263.4 70% 50.4%; /* Shiva Purple #8B5CF6 */
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 161.4 93.5% 30.4%; /* Atlas Green (Emerald) #059669 */
+    --secondary-foreground: 210 40% 98%;
+ 
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+ 
+    --accent: 263.4 70% 50.4%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 263.4 70% 50.4%;
+ 
+    --radius: 0.5rem;
+
+    /* Custom S.H.A.R.K. Colors */
+    --shiva-purple: #8B5CF6;
+    --hades-gold: #FACC15;
+    --atlas-green: #10B981;
+    --ravena-blue: #3B82F6;
+    --kerberos-red: #EF4444; 
+    --neon-glow: 0 0 20px rgba(139, 92, 246, 0.3);
+  }
+ 
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+ 
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+ 
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+ 
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+ 
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+ 
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom Utilities from Mockup */
+.glass-panel {
+    background: rgba(22, 22, 22, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), var(--neon-glow);
+}

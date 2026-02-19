@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.H.A.R.K. Setup Wizard - Mockup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=JetBrains+Mono&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #050505;
+            --card-glass: rgba(22, 22, 22, 0.8);
+            --shiva-purple: #8B5CF6;
+            --hades-gold: #FACC15;
+            --text-main: #E5E7EB;
+            --text-muted: #9CA3AF;
+            --neon-glow: 0 0 20px rgba(139, 92, 246, 0.3);
+            --success-green: #10B981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 50%, #1a1033 0%, #050505 100%);
+        }
+
+        .wizard-container {
+            width: 1000px;
+            height: 650px;
+            background: var(--card-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), var(--neon-glow);
+            position: relative;
+        }
+
+        /* Top Stepper */
+        .stepper {
+            padding: 40px 60px 20px;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .stepper-line {
+            position: absolute;
+            top: 55px;
+            left: 80px;
+            right: 80px;
+            height: 2px;
+            background: rgba(139, 92, 246, 0.1);
+            z-index: 1;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            z-index: 2;
+            width: 80px;
+            opacity: 0.4;
+            transition: opacity 0.3s;
+        }
+
+        .step.active {
+            opacity: 1;
+        }
+
+        .step.completed {
+            opacity: 0.8;
+        }
+
+        .step-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #111;
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .step.active .step-circle {
+            background: var(--shiva-purple);
+            border-color: var(--shiva-purple);
+            box-shadow: 0 0 15px var(--shiva-purple);
+        }
+
+        .step.completed .step-circle {
+            background: var(--success-green);
+            border-color: var(--success-green);
+            color: white;
+        }
+
+        .step-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        /* Main Content Area */
+        .content-area {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            padding: 20px 40px 40px;
+            gap: 40px;
+            overflow: hidden;
+        }
+
+        .view {
+            display: none;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        .view.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hades Section */
+        .hades-panel {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            height: 100%;
+        }
+
+        .hades-img {
+            width: 220px;
+            height: 220px;
+            object-fit: contain;
+            margin-bottom: 25px;
+        }
+
+        .hades-chat {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            text-align: left;
+            position: relative;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border-left: 3px solid var(--shiva-purple);
+        }
+
+        /* Form Section */
+        .form-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            background: linear-gradient(to right, #fff, #8B5CF6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .explanation {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .tutorial-list {
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .tutorial-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .tutorial-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .badge {
+            background: var(--shiva-purple);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            flex-shrink: 0;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px 20px;
+            border-radius: 12px;
+            color: white;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--shiva-purple);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.15);
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        /* Buttons */
+        .footer {
+            padding: 0 40px 40px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+
+        button {
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-back {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+        }
+
+        .btn-next {
+            background: var(--shiva-purple);
+            border: none;
+            color: white;
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-next:hover {
+            box-shadow: 0 12px 25px rgba(139, 92, 246, 0.5);
+        }
+
+        /* Dica da Shiva - Global Component */
+        .shiva-tip {
+            position: absolute;
+            right: 40px;
+            bottom: 100px;
+            /* Above footer */
+            width: 280px;
+            background: rgba(20, 10, 40, 0.95);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 16px;
+            backdrop-filter: blur(15px);
+            font-size: 13px;
+            line-height: 1.5;
+            color: #d8b4fe;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            z-index: 50;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .shiva-tip-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: rgba(139, 92, 246, 0.1);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+        }
+
+        .tip-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--shiva-purple);
+            letter-spacing: 1px;
+        }
+
+        .btn-minimize {
+            background: transparent;
+            border: none;
+            color: var(--shiva-purple);
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px;
+            /* Mais área de clique */
+            width: 40px;
+            /* Maior largura */
+            height: 40px;
+            /* Maior altura */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .btn-minimize:hover {
+            background: rgba(139, 92, 246, 0.2);
+        }
+
+        .shiva-tip-content {
+            padding: 16px;
+        }
+
+        .shiva-bulb-icon {
+            display: none;
+            font-size: 24px;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Minimized State */
+        .shiva-tip.minimized {
+            width: 60px;
+            /* Um pouco maior para facilitar o clique */
+            height: 60px;
+            border-radius: 50%;
+            top: 20px;
+            /* Movido para o topo direito para evitar qualquer conflito */
+            right: 20px;
+            bottom: auto;
+            /* Remove o bottom */
+            padding: 0;
+            background: var(--shiva-purple);
+            border-color: var(--shiva-purple);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+            cursor: pointer;
+            overflow: hidden;
+            /* Garante que nada vaze */
+        }
+
+        .shiva-tip.minimized .shiva-tip-header,
+        .shiva-tip.minimized .shiva-tip-content {
+            display: none !important;
+            /* Força o desaparecimento */
+        }
+
+        .shiva-tip.minimized .shiva-bulb-icon {
+            display: flex;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Final Step Special Styles */
+        .final-success {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100%;
+            padding-bottom: 50px;
+            /* Space for footer/tip */
+        }
+
+        .success-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            color: var(--success-green);
+            filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.4));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .final-title {
+            font-size: 42px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, #10B981 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wizard-container">
+        <!-- Stepper -->
+        <div class="stepper" id="stepper">
+            <div class="stepper-line"></div>
+            <div class="step active" data-step="0">
+                <div class="step-circle">0</div>
+                <div class="step-label">Início</div>
+            </div>
+            <div class="step" data-step="1">
+                <div class="step-circle">1</div>
+                <div class="step-label">GitHub</div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Supabase</div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-circle">3</div>
+                <div class="step-label">Vercel</div>
+            </div>
+            <div class="step" data-step="4">
+                <div class="step-circle">4</div>
+                <div class="step-label">Firecrawl</div>
+            </div>
+            <div class="step" data-step="5">
+                <div class="step-circle">5</div>
+                <div class="step-label">Finalizar</div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content-area">
+            <!-- Left: Hades (Fixed) -->
+            <div class="hades-panel">
+                <img src="../images/Hades_sembg.png" alt="Hades" class="hades-img" id="hades-avatar">
+                <div class="hades-chat" id="hades-msg">
+                    "Bem-vindo ao cockpit. Eu sou o Hades. Enquanto os outros falam de sonhos, eu garanto que a
+                    infraestrutura não colapse."
+                </div>
+            </div>
+
+            <!-- Right: Dynamic Views -->
+            <div class="form-panel">
+
+                <!-- View 0: Apresentação -->
+                <div class="view active" id="view-0">
+                    <h2>O Pacto de Execução</h2>
+                    <p class="explanation">
+                        Eu vou assumir todo o <strong>trabalho técnico sujo</strong> pra você: Vou criar os bancos,
+                        configurar os servidores e gerenciar as conexões. <br><br>
+                        Você só precisa me dar as chaves de acesso. Mas fica tranquilo que é tudo em segurança e nenhuma
+                        informação vai ser compartilhada. Menos código, mais segurança. Podemos começar?
+                    </p>
+                </div>
+
+                <!-- View 1: GitHub -->
+                <div class="view" id="view-1">
+                    <h2>Cofre de Código (GitHub)</h2>
+                    <p class="explanation">
+                        O GitHub é como um "Cofre Digital". É lá que seu projeto fica salvo e onde cada pequena mudança
+                        é registrada com segurança total.
+                    </p>
+
+                    <div class="tutorial-list">
+                        <div class="tutorial-item">
+                            <span class="badge">1</span>
+                            <span>No seu GitHub, clique na sua <strong>foto de perfil</strong> (canto superior direito)
+                                e vá em <strong>Settings</strong>.</span>
+                        </div>
+                        <div class="tutorial-item">
+                            <span class="badge">2</span>
+                            <span>No menu lateral esquerdo, desça até o final e clique em <strong>Developer
+                                    settings</strong>.</span>
+                        </div>
+                        <div class="tutorial-item">
+                            <span class="badge">3</span>
+                            <span>Clique em <strong>Personal access tokens</strong> > <strong>Tokens (classic)</strong>
+                                e gere um novo token marcando a caixinha <strong>'repo'</strong>.</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Cole seu Personal Access Token (PAT) aqui:</label>
+                        <input type="password" id="github-pat" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx">
+                    </div>
+                </div>
+
+                <!-- View 2: Supabase -->
+                <div class="view" id="view-2">
+                    <h2>O Cérebro (Supabase)</h2>
+                    <p class="explanation">
+                        Precisamos de uma chave mestra para que o Hades possa criar e gerenciar todos os seus projetos
+                        sem limites.
+                    </p>
+
+                    <div class="input-group">
+                        <label>Supabase Access Token (Global)</label>
+                        <input type="password" id="supabase-access-token" placeholder="sbp_xxxxxxxxxxxxxxxxxxxxxx">
+                    </div>
+                </div>
+
+                <!-- View 3: Vercel -->
+                <div class="view" id="view-3">
+                    <h2>A Vitrine (Vercel)</h2>
+                    <p class="explanation">
+                        O letreiro da sua loja. Com isso, o deploy será automático sempre que as tarefas forem
+                        concluídas.
+                    </p>
+
+                    <div class="input-group">
+                        <label>Vercel Access Token</label>
+                        <input type="password" id="vercel-token" placeholder="vc_xxxxxxxxxxxxxxxxxxxxxx">
+                    </div>
+                    <div class="input-group">
+                        <label>Team ID (Opcional)</label>
+                        <input type="text" id="vercel-team-id" placeholder="team_xxxxxxxxxxxx">
+                    </div>
+                </div>
+
+                <!-- View 4: Firecrawl -->
+                <div class="view" id="view-4">
+                    <h2>Pesquisa (Firecrawl)</h2>
+                    <p class="explanation">
+                        Dê aos seus agentes o poder de navegar na web e extrair dados em tempo real.
+                    </p>
+
+                    <div class="input-group">
+                        <label>Firecrawl API Key</label>
+                        <input type="password" id="firecrawl-key" placeholder="fc_xxxxxxxxxxxxxxxxxxxxxx">
+                    </div>
+                </div>
+
+                <!-- View 5: Finalizar -->
+                <div class="view" id="view-5">
+                    <div class="final-success">
+                        <div class="success-icon">🚀</div>
+                        <h2 class="final-title">Setup Finalizado</h2>
+                        <p class="explanation" style="max-width: 400px; margin: 0 auto; margin-bottom: 20px;">
+                            Todas as chaves foram entregues ao Hades. <br>
+                            Sua infraestrutura de código, dados e deploy está pronta para escalar.
+                        </p>
+
+                        <div id="cockpit-launcher"
+                            style="display: none; flex-direction: column; align-items: center; gap: 10px;">
+                            <p style="color: var(--atlas-green);">⚡ Motores ligados! Acesse seu Cockpit:</p>
+                            <a href="http://localhost:3000" target="_blank" class="cyber-button"
+                                style="text-decoration: none; display: inline-block; background: var(--success-green); padding: 15px 30px; border-radius: 8px; color: black; font-weight: bold; box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);">
+                                ABRIR COCKPIT
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Global Shiva Tip -->
+        <div class="shiva-tip" id="shiva-tip-container">
+            <div class="shiva-tip-header">
+                <span class="tip-title">💡 Dica da Shiva</span>
+                <button class="btn-minimize" id="btn-minimize-tip">_</button>
+            </div>
+            <div class="shiva-tip-content" id="shiva-tip-text">
+                Fica tranquilo! O Hades é meio ranzinza, mas ele é o melhor em proteger seus dados e automatizar o
+                chato.
+            </div>
+            <div class="shiva-bulb-icon">💡</div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <button class="btn-back" id="btn-back" style="display:none;">Voltar</button>
+            <button class="btn-next" id="btn-next">Começar Setup</button>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        const totalSteps = 6;
+        const views = document.querySelectorAll('.view');
+        const steps = document.querySelectorAll('.step');
+        const btnNext = document.getElementById('btn-next');
+        const btnBack = document.getElementById('btn-back');
+        const hadesMsg = document.getElementById('hades-msg');
+
+        // Shiva Tip Elements
+        const shivaTipContainer = document.getElementById('shiva-tip-container');
+        const shivaTipText = document.getElementById('shiva-tip-text');
+        const btnMinimizeTip = document.getElementById('btn-minimize-tip');
+
+        const messages = [
+            "Bem-vindo ao nosso cockpit de configuração. Eu sou o Hades. Enquanto a Shiva adora fazer você sonhar, eu garanto que a sua infraestrutura não colapse no meio do caminho.",
+            "Primeiro vamos configurar o GitHub. Preciso dessa chave para organizar suas 'gavetas' de arquivos na nuvem.",
+            "Agora o Supabase. O Supabase é onde os seus dados vão morar. Sem ele, não temos memória.",
+            "Vercel! É aqui que o seu site ganha vida na internet. Estamos quase lá!",
+            "Firecrawl. Dê olhos aos seus agentes para que eles pesquisem a web de verdade.",
+            "Configuração salva. Estou iniciando os propulsores da sua nave agora. Aguarde o sinal verde para acessar o Cockpit em localhost:3000."
+        ];
+
+        const shivaTips = [
+            "Fica tranquilo! O Hades é meio ranzinza, mas ele é o melhor em proteger seus dados e automatizar o chato.",
+            "O GitHub é essencial para que o Hades consiga subir o código que nós vamos criar juntos. Sem essa chave, ele não consegue 'entrar no prédio'.",
+            "Você encontra tudo isso em Project Settings > API no painel do Supabase. Cuidado com a chave Service Role, ela tem poder total!",
+            "No Vercel, vá em Account Settings > Tokens para gerar um com escopo total.",
+            "Uma conta gratuita no firecrawl.dev já libera o poder de pesquisa para o Atlas e a Ravena.",
+            "Agora relaxa e deixa o Hades trabalhar. O setup vai ser mágico! ✨"
+        ];
+
+        // Toggle Tip
+        btnMinimizeTip.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleTip();
+        });
+
+        shivaTipContainer.addEventListener('click', () => {
+            if (shivaTipContainer.classList.contains('minimized')) {
+                toggleTip();
+            }
+        });
+
+        function toggleTip() {
+            shivaTipContainer.classList.toggle('minimized');
+            // Update button icon
+            btnMinimizeTip.innerHTML = shivaTipContainer.classList.contains('minimized') ? '□' : '_';
+        }
+
+        btnNext.addEventListener('click', async () => {
+            if (currentStep === totalSteps - 1) {
+                // Finalizar - Salvar Configs
+                await saveConfig();
+                alert('Tudo pronto! Seu cockpit está configurado. Feche esta janela e volte ao terminal.');
+                return;
+            }
+
+            // Coletar dados ANTES de validar
+            collectData(currentStep);
+
+            // Validar Etapa Atual
+            const isValid = await validateStep(currentStep);
+            if (!isValid) return;
+
+            if (currentStep < totalSteps - 1) {
+                updateStep(currentStep + 1);
+            }
+        });
+
+        async function validateStep(step) {
+            if (step === 0) return true; // Apresentação sempre passa
+
+            btnNext.innerHTML = 'Verificando...';
+            btnNext.disabled = true;
+
+            try {
+                // BYPASS MODE ACTIVATE: Permitir avançar para validação visual a pedido do usuário
+                const bypassValidation = true;
+
+                if (bypassValidation) {
+                    console.log(`[HADES]: Bypass de validação ativo para etapa ${step}. Avançando...`);
+                    // Pequeno delay fake para dar feedback
+                    await new Promise(resolve => setTimeout(resolve, 600));
+                    return true;
+                }
+
+                if (step === 1) { // GitHub
+                    const pat = configData.githubPat;
+                    if (!pat) { alert('Hades: "Preciso do token para continuar."'); return false; }
+
+                    const res = await fetch('/api/validate-github', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ token: pat })
+                    });
+                    const data = await res.json();
+                    if (!data.valid) {
+                        alert('Hades: "Token inválido. Verifique se copiou corretamente."');
+                        return false;
+                    }
+                }
+
+                if (step === 2) { // Supabase
+                    const token = configData.supabaseAccessToken;
+                    if (!token) { alert('Hades: "Preciso do Access Token para continuar."'); return false; }
+
+                    if (!token.startsWith('sbp_')) {
+                        // Apenas um aviso, não bloqueante, pois tokens podem mudar de formato
+                        console.log("Aviso: Formato de token Supabase incomum.");
+                    }
+
+                    const res = await fetch('/api/validate-supabase', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ token: token })
+                    });
+
+                    const data = await res.json();
+                    if (!data.valid) {
+                        alert('Hades: "Token inválido ou expirado. Verifique no painel do Supabase."');
+                        return false;
+                    }
+                }
+
+                return true;
+
+            } catch (error) {
+                console.error(error);
+                // alert('Erro de validação: ' + error.message); // No bypass não mostramos erro
+                return true; // No modo bypass, avançamos mesmo com erro
+            } finally {
+                btnNext.disabled = false;
+                btnNext.innerHTML = 'Verificar & Avançar';
+            }
+        }
+
+        btnBack.addEventListener('click', () => {
+            if (currentStep > 0) {
+                updateStep(currentStep - 1);
+            }
+        });
+
+        function updateStep(newStep) {
+            // Update Stepper
+            steps[currentStep].classList.remove('active');
+            steps[currentStep].classList.add('completed');
+
+            currentStep = newStep;
+            steps[currentStep].classList.add('active');
+
+            // Update Views
+            views.forEach(v => v.classList.remove('active'));
+            const targetView = document.getElementById(`view-${currentStep}`);
+            if (targetView) targetView.classList.add('active');
+
+            // Update Dialogs
+            hadesMsg.innerHTML = messages[currentStep];
+            shivaTipText.innerHTML = shivaTips[currentStep];
+
+            // Re-open tip if it's a new important step (optional, but good for UX)
+            shivaTipContainer.classList.remove('minimized');
+            btnMinimizeTip.innerHTML = '_';
+
+            // Footer Logic
+            btnBack.style.display = currentStep === 0 ? 'none' : 'flex';
+            const nextText = currentStep === 0 ? 'Começar Setup' :
+                currentStep === totalSteps - 1 ? 'Setup Finalizado' : 'Verificar & Avançar';
+            btnNext.innerHTML = nextText;
+        }
+
+        const configData = {
+            githubPat: '',
+            supabaseAccessToken: '',
+            vercelToken: '',
+            vercelTeam: '',
+            firecrawlKey: ''
+        };
+
+        function collectData(step) {
+            if (step === 1) {
+                configData.githubPat = document.getElementById('github-pat').value;
+            }
+            if (step === 2) {
+                configData.supabaseAccessToken = document.getElementById('supabase-access-token').value;
+            } else if (step === 3) {
+                configData.vercelToken = document.getElementById('vercel-token').value;
+                configData.vercelTeam = document.getElementById('vercel-team-id').value;
+            } else if (step === 4) {
+                configData.firecrawlKey = document.getElementById('firecrawl-key').value;
+            }
+        }
+
+        async function saveConfig() {
+            // Loader State
+            btnNext.innerHTML = 'Salvando e Iniciando...';
+            btnNext.disabled = true;
+
+            try {
+                const response = await fetch('/api/save-config', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(configData)
+                });
+                const result = await response.json();
+                console.log(result);
+
+                if (result.success) {
+                    btnNext.innerHTML = 'Setup Finalizado';
+
+                    if (result.started) {
+                        // SOW LAUNCHER
+                        const launcher = document.getElementById('cockpit-launcher');
+                        if (launcher) {
+                            launcher.style.display = 'flex';
+                            launcher.style.animation = 'fadeIn 1s forwards';
+                        }
+                    } else {
+                        // Fallback se não conseguir iniciar
+                        alert('Configuração salva. Tente rodar "npm run dev" manualmente na pasta shark-cockpit.');
+                    }
+                } else {
+                    alert('Erro ao salvar: ' + result.message);
+                    btnNext.disabled = false;
+                }
+
+            } catch (error) {
+                console.error('Erro ao salvar:', error);
+                alert('Erro ao salvar configurações.');
+                btnNext.disabled = false;
+            }
+        }
+    </script>
+</body>
+
+</html>
+```

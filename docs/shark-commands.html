@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shark Method - Comandos Secretos</title>
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --text-color: #e0e0e0;
+            --accent-color: #8b5cf6;
+            /* Violet-500 */
+            --secondary-color: #1f2937;
+            /* Gray-800 */
+            --success-color: #10b981;
+            /* Emerald-500 */
+            --card-bg: #171717;
+            /* Neutral-900 */
+            --border-color: #262626;
+            /* Neutral-800 */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2rem;
+        }
+
+        h1 {
+            color: var(--accent-color);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        p.subtitle {
+            color: #a3a3a3;
+            font-size: 1.1rem;
+        }
+
+        .command-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .command-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: var(--accent-color);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .step-badge {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: bold;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 1.25rem;
+            color: white;
+        }
+
+        .description {
+            color: #a3a3a3;
+            margin-bottom: 1rem;
+        }
+
+        .code-block {
+            background-color: #000;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            color: #a5b4fc;
+            /* Indigo-300 */
+            position: relative;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            /* Allows wrapping on small screens */
+            margin-bottom: 0.5rem;
+        }
+
+        .copy-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+
+        .success-msg {
+            color: var(--success-color);
+            font-size: 0.875rem;
+            margin-left: 0.5rem;
+            opacity: 0;
+            /* Hidden by default */
+            transition: opacity 0.3s;
+        }
+
+        .success-msg.visible {
+            opacity: 1;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: #525252;
+            font-size: 0.875rem;
+        }
+
+        /* SVG Icons */
+        .icon-copy {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Método S.H.A.R.K.</h1>
+            <p class="subtitle">Guia de Comandos</p>
+        </header>
+
+        <!-- AULA 6 -->
+        <div class="command-card">
+            <div class="card-header">
+                <h2>📥 Importando o Método</h2>
+                <span class="step-badge">Aula 6</span>
+            </div>
+            <p class="description">Cole este comando no terminal para trazer a inteligência dos agentes para sua
+                máquina.</p>
+
+            <div class="code-block" id="cmd-aula6">git clone https://github.com/Victorlllima/shark-method.git
+                $HOME/.gemini-shark-temp; cd $HOME/.gemini-shark-temp; .\install.ps1</div>
+
+            <div style="display: flex; align-items: center;">
+                <button class="copy-btn" onclick="copyToClipboard('cmd-aula6')">
+                    <svg class="icon-copy" viewBox="0 0 24 24">
+                        <path
+                            d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z" />
+                    </svg>
+                    Copiar Comando
+                </button>
+                <span class="success-msg" id="msg-aula6">Copiado!</span>
+            </div>
+        </div>
+
+        <!-- AULA 7 -->
+        <div class="command-card">
+            <div class="card-header">
+                <h2>🧙‍♂️ Invocando o Wizard (Setup)</h2>
+                <span class="step-badge">Aula 7</span>
+            </div>
+            <p class="description">Envie esta mensagem para o <strong>ATLAS</strong> no chat para configurar suas
+                chaves.</p>
+
+            <div class="code-block" id="cmd-aula7">Atlas, por favor, rode o script "scripts/setup-wizard.js" para
+                configurarmos o ambiente.</div>
+
+            <div style="display: flex; align-items: center;">
+                <button class="copy-btn" onclick="copyToClipboard('cmd-aula7')">
+                    <svg class="icon-copy" viewBox="0 0 24 24">
+                        <path
+                            d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z" />
+                    </svg>
+                    Copiar Prompt
+                </button>
+                <span class="success-msg" id="msg-aula7">Copiado!</span>
+            </div>
+        </div>
+
+        <!-- AULA 8 -->
+        <div class="command-card">
+            <div class="card-header">
+                <h2>🩺 Check-up Final</h2>
+                <span class="step-badge">Aula 8</span>
+            </div>
+            <p class="description">Envie esta mensagem para a <strong>SHIVA</strong> no chat para validar se tudo está
+                funcionando.</p>
+
+            <div class="code-block" id="cmd-aula8">Shiva, faça um check-up geral no meu ambiente. Verifique se os
+                agentes estão ativos e se as conexões externas estão funcionando.</div>
+
+            <div style="display: flex; align-items: center;">
+                <button class="copy-btn" onclick="copyToClipboard('cmd-aula8')">
+                    <svg class="icon-copy" viewBox="0 0 24 24">
+                        <path
+                            d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z" />
+                    </svg>
+                    Copiar Prompt
+                </button>
+                <span class="success-msg" id="msg-aula8">Copiado!</span>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Vibecoding &copy; 2024 - Método S.H.A.R.K.</p>
+    </footer>
+
+    <script>
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const msgId = 'msg-' + elementId.split('-')[1];
+                const msgElement = document.getElementById(msgId);
+
+                msgElement.classList.add('visible');
+                setTimeout(() => {
+                    msgElement.classList.remove('visible');
+                }, 2000);
+            }).catch(err => {
+                console.error('Falha ao copiar: ', err);
+            });
+        }
+    </script>
+</body>
+
+</html>

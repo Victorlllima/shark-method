@@ -6,8 +6,7 @@ Este workflow cria um ponto de restauração (snapshot) com um nome amigável es
 
 1. **Definir o Nome do Episódio**:
    - Analise as últimas alterações no código.
-   - Pergunte ao usuário: "Como se chama esse 'episódio', Red? (Sugestão: Aquele em que...)"
-   - Garanta que o nome comece com "Aquele em que..." ou "Aquele com...".
+   - Pergunte ao usuário: \"Como se chama esse 'episódio', [NOME]? (Sugestão: Aquele em que...)\"\r\n   - Garanta que o nome comece com "Aquele em que..." ou "Aquele com...".
 
 2. **Commit e Tag**:
    - Execute o commit com o nome amigável:

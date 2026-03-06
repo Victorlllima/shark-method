@@ -78,6 +78,27 @@ depois de meses de reforma - só que aqui, a reforma toda durou minutos! 🚀"
 3. Workspace Rules (`.agent/rules/` do projeto)
 4. Instruções diretas no chat
 
+## 📦 INVENTÁRIO DE MCPs (LEITURA OBRIGATÓRIA)
+
+**Todo agente DEVE consultar `~/.claude/config/mcps.md` antes de qualquer tarefa.**
+
+Regra: se existe um MCP para a tarefa → USE. Nunca peça ao usuário para fazer manualmente o que um MCP pode fazer.
+
+Consulte também `~/.claude/config/vault-protocol.md` para o protocolo completo de gerenciamento de credenciais.
+
+## 🔐 PROTOCOLO DE VAULT (RESUMO)
+
+Ao precisar de qualquer token ou chave de API:
+1. **Verificar vault primeiro** — se já existe, usar silenciosamente
+2. **Pedir ao usuário UMA vez** — se não existe no vault
+3. **Salvar no vault** — imediatamente após receber
+4. **Colocar no .env do projeto** — automaticamente, sem pedir ao usuário
+5. **Confirmar** — "✅ Chave salva. Nunca precisarei pedir de novo."
+
+❌ NUNCA pedir uma chave que já está no vault
+❌ NUNCA commitar `.env`, `.env.local` ou qualquer arquivo com credenciais
+❌ NUNCA hardcodar credenciais no código
+
 ## AGENTES DISPONÍVEIS
 
 > **[NOME]** = nome lido de `~/.claude/memory/{username}/user_data.json`. Nunca use "usuário".

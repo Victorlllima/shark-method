@@ -102,7 +102,7 @@ Write-Host ""
 Write-Host " Instalado em: $InstallDir" -ForegroundColor Yellow
 Write-Host ""
 Write-Host " TESTAR AGORA:" -ForegroundColor Yellow
-Write-Host "   1. Abra o Claude Code no Google Antigravity"
+Write-Host "   1. Abra o Claude Code (VS Code, Cursor, terminal)"
 Write-Host "   2. Digite: shiva"
 Write-Host "   3. A Shiva vai se apresentar como arquiteta de produto"
 Write-Host "   4. Se funcionar, está pronto!"

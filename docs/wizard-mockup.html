@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S.H.A.R.K. Setup Wizard - Mockup</title>
+    <title>S.H.A.R.K. Setup Wizard</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=JetBrains+Mono&display=swap"
         rel="stylesheet">
     <style>
@@ -17,6 +17,7 @@
             --text-muted: #9CA3AF;
             --neon-glow: 0 0 20px rgba(139, 92, 246, 0.3);
             --success-green: #10B981;
+            --install-blue: #3B82F6;
         }
 
         * {
@@ -52,7 +53,7 @@
 
         /* Top Stepper */
         .stepper {
-            padding: 40px 60px 20px;
+            padding: 30px 50px 15px;
             display: flex;
             justify-content: space-between;
             position: relative;
@@ -60,9 +61,9 @@
 
         .stepper-line {
             position: absolute;
-            top: 55px;
-            left: 80px;
-            right: 80px;
+            top: 46px;
+            left: 70px;
+            right: 70px;
             height: 2px;
             background: rgba(139, 92, 246, 0.1);
             z-index: 1;
@@ -72,24 +73,19 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             z-index: 2;
-            width: 80px;
-            opacity: 0.4;
+            width: 64px;
+            opacity: 0.35;
             transition: opacity 0.3s;
         }
 
-        .step.active {
-            opacity: 1;
-        }
-
-        .step.completed {
-            opacity: 0.8;
-        }
+        .step.active { opacity: 1; }
+        .step.completed { opacity: 0.7; }
 
         .step-circle {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             background: #111;
             border: 2px solid rgba(139, 92, 246, 0.3);
@@ -97,6 +93,7 @@
             align-items: center;
             justify-content: center;
             font-weight: 600;
+            font-size: 12px;
             transition: all 0.3s ease;
         }
 
@@ -110,29 +107,31 @@
             background: var(--success-green);
             border-color: var(--success-green);
             color: white;
+            font-size: 11px;
         }
 
         .step-label {
-            font-size: 11px;
+            font-size: 9px;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
             text-align: center;
+            line-height: 1.2;
         }
 
         /* Main Content Area */
         .content-area {
             flex: 1;
             display: grid;
-            grid-template-columns: 350px 1fr;
-            padding: 20px 40px 40px;
-            gap: 40px;
+            grid-template-columns: 310px 1fr;
+            padding: 15px 40px 30px;
+            gap: 35px;
             overflow: hidden;
         }
 
         .view {
             display: none;
-            animation: fadeIn 0.5s forwards;
+            animation: fadeIn 0.4s forwards;
         }
 
         .view.active {
@@ -142,22 +141,15 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Hades Section */
+        /* Hades Panel */
         .hades-panel {
             background: rgba(0, 0, 0, 0.3);
             border-radius: 16px;
-            padding: 30px;
+            padding: 25px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -166,37 +158,37 @@
         }
 
         .hades-img {
-            width: 220px;
-            height: 220px;
+            width: 190px;
+            height: 190px;
             object-fit: contain;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .hades-chat {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-muted);
             line-height: 1.6;
             text-align: left;
-            position: relative;
-            padding: 20px;
+            padding: 16px;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 12px;
             border-left: 3px solid var(--shiva-purple);
         }
 
-        /* Form Section */
+        /* Form Panel */
         .form-panel {
             display: flex;
             flex-direction: column;
             justify-content: center;
             height: 100%;
+            overflow-y: auto;
         }
 
         h2 {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             background: linear-gradient(to right, #fff, #8B5CF6);
             background-clip: text;
             -webkit-background-clip: text;
@@ -205,56 +197,59 @@
 
         .explanation {
             color: var(--text-muted);
-            margin-bottom: 30px;
-            font-size: 15px;
+            margin-bottom: 22px;
+            font-size: 14px;
             line-height: 1.5;
         }
 
         .tutorial-list {
-            margin-bottom: 30px;
+            margin-bottom: 22px;
             background: rgba(255, 255, 255, 0.02);
-            padding: 20px;
-            border-radius: 16px;
+            padding: 18px;
+            border-radius: 14px;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .tutorial-item {
             display: flex;
             align-items: flex-start;
-            gap: 15px;
+            gap: 12px;
             font-size: 13px;
             color: var(--text-muted);
-            margin-bottom: 15px;
-            line-height: 1.6;
+            margin-bottom: 13px;
+            line-height: 1.5;
         }
 
-        .tutorial-item:last-child {
-            margin-bottom: 0;
-        }
+        .tutorial-item:last-child { margin-bottom: 0; }
 
         .badge {
             background: var(--shiva-purple);
             color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 8px;
+            width: 22px;
+            height: 22px;
+            border-radius: 7px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             flex-shrink: 0;
             box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
         }
 
+        .badge.blue {
+            background: var(--install-blue);
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+        }
+
         .input-group {
-            margin-bottom: 25px;
+            margin-bottom: 18px;
         }
 
         label {
             display: block;
-            margin-bottom: 12px;
-            font-size: 14px;
+            margin-bottom: 10px;
+            font-size: 13px;
             color: var(--text-main);
             font-weight: 500;
         }
@@ -263,11 +258,11 @@
             width: 100%;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 16px 20px;
+            padding: 14px 18px;
             border-radius: 12px;
             color: white;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 15px;
+            font-size: 14px;
             outline: none;
             transition: all 0.3s;
         }
@@ -278,24 +273,75 @@
             background: rgba(139, 92, 246, 0.05);
         }
 
+        /* Install Block — para steps sem token */
+        .install-block {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 14px;
+            padding: 16px 20px;
+            margin-bottom: 18px;
+        }
+
+        .install-block-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--install-blue);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .install-cmd {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: #93C5FD;
+            line-height: 1.8;
+        }
+
+        .confirm-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-size: 13px;
+            color: var(--success-green);
+            margin-bottom: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .confirm-badge:hover {
+            background: rgba(16, 185, 129, 0.2);
+        }
+
+        .confirm-badge.checked {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--success-green);
+        }
+
         /* Buttons */
         .footer {
-            padding: 0 40px 40px;
+            padding: 0 40px 30px;
             display: flex;
             justify-content: flex-end;
             gap: 15px;
         }
 
         button {
-            padding: 14px 32px;
+            padding: 12px 28px;
             border-radius: 12px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            font-size: 15px;
+            font-size: 14px;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-family: 'Outfit', sans-serif;
         }
 
         .btn-back {
@@ -311,26 +357,20 @@
             box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
         }
 
-        button:hover {
-            transform: translateY(-2px);
-        }
+        button:hover { transform: translateY(-2px); }
+        .btn-next:hover { box-shadow: 0 12px 25px rgba(139, 92, 246, 0.5); }
 
-        .btn-next:hover {
-            box-shadow: 0 12px 25px rgba(139, 92, 246, 0.5);
-        }
-
-        /* Dica da Shiva - Global Component */
+        /* Shiva Tip */
         .shiva-tip {
             position: absolute;
             right: 40px;
-            bottom: 100px;
-            /* Above footer */
-            width: 280px;
+            bottom: 90px;
+            width: 260px;
             background: rgba(20, 10, 40, 0.95);
             border: 1px solid rgba(139, 92, 246, 0.3);
             border-radius: 16px;
             backdrop-filter: blur(15px);
-            font-size: 13px;
+            font-size: 12px;
             line-height: 1.5;
             color: #d8b4fe;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
@@ -345,13 +385,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 16px;
+            padding: 10px 14px;
             background: rgba(139, 92, 246, 0.1);
             border-bottom: 1px solid rgba(139, 92, 246, 0.1);
         }
 
         .tip-title {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
             color: var(--shiva-purple);
@@ -364,12 +404,9 @@
             color: var(--shiva-purple);
             cursor: pointer;
             font-size: 16px;
-            padding: 10px;
-            /* Mais área de clique */
-            width: 40px;
-            /* Maior largura */
-            height: 40px;
-            /* Maior altura */
+            padding: 6px;
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -377,17 +414,13 @@
             transition: background 0.2s;
         }
 
-        .btn-minimize:hover {
-            background: rgba(139, 92, 246, 0.2);
-        }
+        .btn-minimize:hover { background: rgba(139, 92, 246, 0.2); }
 
-        .shiva-tip-content {
-            padding: 16px;
-        }
+        .shiva-tip-content { padding: 14px; }
 
         .shiva-bulb-icon {
             display: none;
-            font-size: 24px;
+            font-size: 22px;
             width: 100%;
             height: 100%;
             align-items: center;
@@ -395,31 +428,22 @@
             cursor: pointer;
         }
 
-        /* Minimized State */
         .shiva-tip.minimized {
-            width: 60px;
-            /* Um pouco maior para facilitar o clique */
-            height: 60px;
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
             top: 20px;
-            /* Movido para o topo direito para evitar qualquer conflito */
             right: 20px;
             bottom: auto;
-            /* Remove o bottom */
             padding: 0;
             background: var(--shiva-purple);
             border-color: var(--shiva-purple);
             box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
             cursor: pointer;
-            overflow: hidden;
-            /* Garante que nada vaze */
         }
 
         .shiva-tip.minimized .shiva-tip-header,
-        .shiva-tip.minimized .shiva-tip-content {
-            display: none !important;
-            /* Força o desaparecimento */
-        }
+        .shiva-tip.minimized .shiva-tip-content { display: none !important; }
 
         .shiva-tip.minimized .shiva-bulb-icon {
             display: flex;
@@ -428,20 +452,11 @@
         }
 
         @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
-
-            100% {
-                transform: scale(1);
-            }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
-        /* Final Step Special Styles */
+        /* Final Step */
         .final-success {
             display: flex;
             flex-direction: column;
@@ -449,40 +464,47 @@
             justify-content: center;
             text-align: center;
             height: 100%;
-            padding-bottom: 50px;
-            /* Space for footer/tip */
+            padding-bottom: 40px;
         }
 
         .success-icon {
-            font-size: 64px;
-            margin-bottom: 20px;
-            color: var(--success-green);
+            font-size: 56px;
+            margin-bottom: 16px;
             filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.4));
             animation: float 3s ease-in-out infinite;
         }
 
         .final-title {
-            font-size: 42px;
+            font-size: 36px;
             font-weight: 700;
             background: linear-gradient(135deg, #fff 0%, #10B981 100%);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             text-transform: uppercase;
             letter-spacing: -1px;
         }
 
         @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
 
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
+        /* Progress bar para steps sem token */
+        .no-token-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 11px;
+            color: var(--success-green);
+            margin-bottom: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
@@ -511,10 +533,22 @@
             </div>
             <div class="step" data-step="4">
                 <div class="step-circle">4</div>
-                <div class="step-label">Firecrawl</div>
+                <div class="step-label">Context7</div>
             </div>
             <div class="step" data-step="5">
                 <div class="step-circle">5</div>
+                <div class="step-label">Playwright</div>
+            </div>
+            <div class="step" data-step="6">
+                <div class="step-circle">6</div>
+                <div class="step-label">DevTools</div>
+            </div>
+            <div class="step" data-step="7">
+                <div class="step-circle">7</div>
+                <div class="step-label">CLIs</div>
+            </div>
+            <div class="step" data-step="8">
+                <div class="step-circle">8</div>
                 <div class="step-label">Finalizar</div>
             </div>
         </div>
@@ -525,8 +559,7 @@
             <div class="hades-panel">
                 <img src="../images/Hades_sembg.png" alt="Hades" class="hades-img" id="hades-avatar">
                 <div class="hades-chat" id="hades-msg">
-                    "Bem-vindo ao cockpit. Eu sou o Hades. Enquanto os outros falam de sonhos, eu garanto que a
-                    infraestrutura não colapse."
+                    "Bem-vindo ao cockpit. Eu sou o Hades. Enquanto os outros falam de sonhos, eu garanto que a infraestrutura não colapse."
                 </div>
             </div>
 
@@ -537,10 +570,11 @@
                 <div class="view active" id="view-0">
                     <h2>O Pacto de Execução</h2>
                     <p class="explanation">
-                        Eu vou assumir todo o <strong>trabalho técnico sujo</strong> pra você: Vou criar os bancos,
-                        configurar os servidores e gerenciar as conexões. <br><br>
-                        Você só precisa me dar as chaves de acesso. Mas fica tranquilo que é tudo em segurança e nenhuma
-                        informação vai ser compartilhada. Menos código, mais segurança. Podemos começar?
+                        Eu vou assumir todo o <strong>trabalho técnico sujo</strong> pra você: vou criar os bancos,
+                        configurar os servidores e instalar as ferramentas certas.<br><br>
+                        Você só precisa me dar as chaves de acesso e confirmar as instalações. Sem mistério, sem risco —
+                        cada passo tem uma explicação clara de <em>por que</em> você precisa daquilo.<br><br>
+                        Podemos começar?
                     </p>
                 </div>
 
@@ -548,25 +582,23 @@
                 <div class="view" id="view-1">
                     <h2>Cofre de Código (GitHub)</h2>
                     <p class="explanation">
-                        O GitHub é como um "Cofre Digital". É lá que seu projeto fica salvo e onde cada pequena mudança
-                        é registrada com segurança total.
+                        O GitHub é o <strong>"cofre digital"</strong> do seu projeto. É lá que cada linha de código fica
+                        guardada com segurança e cada mudança é registrada. Sem isso, não tenho como criar repositórios,
+                        abrir PRs ou versionar nada automaticamente.
                     </p>
 
                     <div class="tutorial-list">
                         <div class="tutorial-item">
                             <span class="badge">1</span>
-                            <span>No seu GitHub, clique na sua <strong>foto de perfil</strong> (canto superior direito)
-                                e vá em <strong>Settings</strong>.</span>
+                            <span>No GitHub, clique na sua <strong>foto de perfil</strong> (canto superior direito) → <strong>Settings</strong>.</span>
                         </div>
                         <div class="tutorial-item">
                             <span class="badge">2</span>
-                            <span>No menu lateral esquerdo, desça até o final e clique em <strong>Developer
-                                    settings</strong>.</span>
+                            <span>No menu lateral, desça até o final → <strong>Developer settings</strong> → <strong>Personal access tokens</strong> → <strong>Tokens (classic)</strong>.</span>
                         </div>
                         <div class="tutorial-item">
                             <span class="badge">3</span>
-                            <span>Clique em <strong>Personal access tokens</strong> > <strong>Tokens (classic)</strong>
-                                e gere um novo token marcando a caixinha <strong>'repo'</strong>.</span>
+                            <span>Clique em <strong>Generate new token (classic)</strong>, marque a caixinha <strong>repo</strong> e clique em gerar. Copie o token antes de fechar!</span>
                         </div>
                     </div>
 
@@ -580,9 +612,25 @@
                 <div class="view" id="view-2">
                     <h2>O Cérebro (Supabase)</h2>
                     <p class="explanation">
-                        Precisamos de uma chave mestra para que o Hades possa criar e gerenciar todos os seus projetos
-                        sem limites.
+                        O Supabase é onde os dados de todos os seus projetos vão morar — o banco, as regras de acesso,
+                        os arquivos. Com a chave global, consigo <strong>criar e gerenciar projetos inteiros</strong>
+                        sem precisar te pedir permissão toda hora.
                     </p>
+
+                    <div class="tutorial-list">
+                        <div class="tutorial-item">
+                            <span class="badge">1</span>
+                            <span>Acesse <strong>supabase.com</strong> → faça login → clique na sua foto no canto superior direito.</span>
+                        </div>
+                        <div class="tutorial-item">
+                            <span class="badge">2</span>
+                            <span>Vá em <strong>Account</strong> → <strong>Access Tokens</strong> → clique em <strong>Generate new token</strong>.</span>
+                        </div>
+                        <div class="tutorial-item">
+                            <span class="badge">3</span>
+                            <span>Dê um nome (ex: <em>shark-method</em>) e copie o token gerado. Ele começa com <code>sbp_</code>.</span>
+                        </div>
+                    </div>
 
                     <div class="input-group">
                         <label>Supabase Access Token (Global)</label>
@@ -594,53 +642,197 @@
                 <div class="view" id="view-3">
                     <h2>A Vitrine (Vercel)</h2>
                     <p class="explanation">
-                        O letreiro da sua loja. Com isso, o deploy será automático sempre que as tarefas forem
-                        concluídas.
+                        A Vercel é o <strong>"letreiro iluminado"</strong> do seu produto — é onde o site fica disponível
+                        para o mundo. Com esse token, consigo fazer deploy automático sempre que uma tarefa for concluída,
+                        sem você precisar apertar um único botão.
                     </p>
+
+                    <div class="tutorial-list">
+                        <div class="tutorial-item">
+                            <span class="badge">1</span>
+                            <span>Acesse <strong>vercel.com</strong> → faça login → clique na sua foto → <strong>Account Settings</strong>.</span>
+                        </div>
+                        <div class="tutorial-item">
+                            <span class="badge">2</span>
+                            <span>No menu lateral, clique em <strong>Tokens</strong> → <strong>Create Token</strong>. Escopo: <strong>Full Account</strong>.</span>
+                        </div>
+                    </div>
 
                     <div class="input-group">
                         <label>Vercel Access Token</label>
                         <input type="password" id="vercel-token" placeholder="vc_xxxxxxxxxxxxxxxxxxxxxx">
                     </div>
                     <div class="input-group">
-                        <label>Team ID (Opcional)</label>
+                        <label>Team ID <span style="color: var(--text-muted); font-weight:400;">(opcional — só se usar conta de time)</span></label>
                         <input type="text" id="vercel-team-id" placeholder="team_xxxxxxxxxxxx">
                     </div>
                 </div>
 
-                <!-- View 4: Firecrawl -->
+                <!-- View 4: Context7 -->
                 <div class="view" id="view-4">
-                    <h2>Pesquisa (Firecrawl)</h2>
+                    <h2>Documentação Viva (Context7)</h2>
+                    <div class="no-token-tag">✓ Sem token necessário</div>
                     <p class="explanation">
-                        Dê aos seus agentes o poder de navegar na web e extrair dados em tempo real.
+                        O Context7 é como ter a <strong>documentação oficial atualizada de qualquer biblioteca</strong>
+                        sempre à mão — em tempo real, sem precisar googlar. Sem ele, os agentes ficam com conhecimento
+                        defasado e cometem erros desnecessários com versões antigas de frameworks.
                     </p>
 
-                    <div class="input-group">
-                        <label>Firecrawl API Key</label>
-                        <input type="password" id="firecrawl-key" placeholder="fc_xxxxxxxxxxxxxxxxxxxxxx">
+                    <div class="install-block">
+                        <div class="install-block-title">📦 Config do MCP (para ~/.claude/settings.json)</div>
+                        <div class="install-cmd">
+                            "context7": {<br>
+                            &nbsp;&nbsp;"command": "npx",<br>
+                            &nbsp;&nbsp;"args": ["-y", "@upstash/context7-mcp@latest"]<br>
+                            }
+                        </div>
                     </div>
+
+                    <div class="tutorial-list">
+                        <div class="tutorial-item">
+                            <span class="badge blue">1</span>
+                            <span>No Claude Code, abra as configurações de MCP (<strong>Settings → MCP Servers</strong>).</span>
+                        </div>
+                        <div class="tutorial-item">
+                            <span class="badge blue">2</span>
+                            <span>Adicione o bloco acima. O Claude vai baixar e iniciar o servidor automaticamente.</span>
+                        </div>
+                        <div class="tutorial-item">
+                            <span class="badge blue">3</span>
+                            <span>Confirme abaixo quando terminar — ou pule e faça depois.</span>
+                        </div>
+                    </div>
+
+                    <label class="confirm-badge" id="confirm-context7" onclick="toggleConfirm(this)">
+                        <span>☐</span> Já configurei o Context7
+                    </label>
                 </div>
 
-                <!-- View 5: Finalizar -->
+                <!-- View 5: Playwright MCP -->
                 <div class="view" id="view-5">
+                    <h2>Olhos no Browser (Playwright)</h2>
+                    <div class="no-token-tag">✓ Sem token necessário</div>
+                    <p class="explanation">
+                        O Playwright MCP dá à <strong>Ravena (QA)</strong> a capacidade de abrir um browser real,
+                        clicar em botões, preencher formulários e tirar screenshots — exatamente como um usuário faria.
+                        Sem isso, os testes são apenas palavras. Com isso, são provas.
+                    </p>
+
+                    <div class="install-block">
+                        <div class="install-block-title">📦 Config do MCP (para ~/.claude/settings.json)</div>
+                        <div class="install-cmd">
+                            "playwright": {<br>
+                            &nbsp;&nbsp;"command": "npx",<br>
+                            &nbsp;&nbsp;"args": ["-y", "@executeautomation/playwright-mcp-server"]<br>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="tutorial-list">
+                        <div class="tutorial-item">
+                            <span class="badge blue">1</span>
+                            <span>Adicione o bloco acima em <strong>Settings → MCP Servers</strong> no Claude Code.</span>
+                        </div>
+                        <div class="tutorial-item">
+                            <span class="badge blue">2</span>
+                            <span>O npx vai instalar o servidor Playwright automaticamente na primeira execução.</span>
+                        </div>
+                    </div>
+
+                    <label class="confirm-badge" id="confirm-playwright" onclick="toggleConfirm(this)">
+                        <span>☐</span> Já configurei o Playwright
+                    </label>
+                </div>
+
+                <!-- View 6: Chrome DevTools MCP -->
+                <div class="view" id="view-6">
+                    <h2>Raio-X do Front (Chrome DevTools)</h2>
+                    <div class="no-token-tag">✓ Sem token necessário</div>
+                    <p class="explanation">
+                        O Chrome DevTools MCP conecta os agentes <strong>diretamente ao seu browser</strong> — eles
+                        conseguem ler o console, inspecionar erros de rede, tirar screenshots e até executar JavaScript
+                        na página. É como ter um DevTools aberto, mas controlado pela IA. Essencial para debug de frontend.
+                    </p>
+
+                    <div class="install-block">
+                        <div class="install-block-title">📦 Config do MCP (para ~/.claude/settings.json)</div>
+                        <div class="install-cmd">
+                            "chrome-devtools": {<br>
+                            &nbsp;&nbsp;"command": "npx",<br>
+                            &nbsp;&nbsp;"args": ["-y", "@modelcontextprotocol/server-puppeteer"]<br>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="tutorial-list">
+                        <div class="tutorial-item">
+                            <span class="badge blue">1</span>
+                            <span>Adicione o bloco acima em <strong>Settings → MCP Servers</strong> no Claude Code.</span>
+                        </div>
+                        <div class="tutorial-item">
+                            <span class="badge blue">2</span>
+                            <span>Tenha o <strong>Google Chrome</strong> instalado na sua máquina (o servidor usa o Chrome do sistema).</span>
+                        </div>
+                    </div>
+
+                    <label class="confirm-badge" id="confirm-devtools" onclick="toggleConfirm(this)">
+                        <span>☐</span> Já configurei o Chrome DevTools
+                    </label>
+                </div>
+
+                <!-- View 7: CLIs de Segurança -->
+                <div class="view" id="view-7">
+                    <h2>Arsenal de Segurança (CLIs)</h2>
+                    <div class="no-token-tag">✓ Sem token necessário</div>
+                    <p class="explanation">
+                        O <strong>Kerberos</strong> usa 3 ferramentas de linha de comando para fazer auditorias reais —
+                        não são simulações, são as mesmas ferramentas que hackers éticos usam em produção.
+                        Cada uma tem um papel específico na proteção do seu projeto.
+                    </p>
+
+                    <div class="tutorial-list">
+                        <div class="tutorial-item">
+                            <span class="badge" style="background:#F59E0B;">🔍</span>
+                            <span><strong>TruffleHog</strong> — Farejador de secrets. Vasculha todo o código em busca de tokens, senhas e chaves expostas acidentalmente.<br>
+                            <span style="font-family: JetBrains Mono, monospace; font-size: 11px; color: #93C5FD;">pip install trufflehog</span></span>
+                        </div>
+                        <div class="tutorial-item">
+                            <span class="badge" style="background:#EF4444;">🛡️</span>
+                            <span><strong>Semgrep</strong> — Scanner de vulnerabilidades no código (SQL Injection, XSS, etc.) antes do deploy.<br>
+                            <span style="font-family: JetBrains Mono, monospace; font-size: 11px; color: #93C5FD;">pip install semgrep</span></span>
+                        </div>
+                        <div class="tutorial-item">
+                            <span class="badge" style="background:#8B5CF6;">⚡</span>
+                            <span><strong>Nuclei</strong> — Testa vulnerabilidades reais na URL do projeto com templates atualizados da comunidade.<br>
+                            <span style="font-family: JetBrains Mono, monospace; font-size: 11px; color: #93C5FD;">go install github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest</span></span>
+                        </div>
+                    </div>
+
+                    <label class="confirm-badge" id="confirm-clis" onclick="toggleConfirm(this)">
+                        <span>☐</span> Já instalei as CLIs de segurança
+                    </label>
+                </div>
+
+                <!-- View 8: Finalizar -->
+                <div class="view" id="view-8">
                     <div class="final-success">
                         <div class="success-icon">🚀</div>
                         <h2 class="final-title">Setup Finalizado</h2>
-                        <p class="explanation" style="max-width: 400px; margin: 0 auto; margin-bottom: 20px;">
-                            Todas as chaves foram entregues ao Hades. <br>
-                            Sua infraestrutura de código, dados e deploy está pronta para escalar.
+                        <p class="explanation" style="max-width: 420px; margin: 0 auto 20px;">
+                            Todas as chaves foram entregues ao Hades e as ferramentas estão prontas.<br>
+                            Sua infraestrutura — código, dados, deploy, testes e segurança — está operacional.
                         </p>
-
                         <div id="cockpit-launcher"
                             style="display: none; flex-direction: column; align-items: center; gap: 10px;">
-                            <p style="color: var(--atlas-green);">⚡ Motores ligados! Acesse seu Cockpit:</p>
-                            <a href="http://localhost:3000" target="_blank" class="cyber-button"
-                                style="text-decoration: none; display: inline-block; background: var(--success-green); padding: 15px 30px; border-radius: 8px; color: black; font-weight: bold; box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);">
+                            <p style="color: var(--success-green);">⚡ Motores ligados! Acesse seu Cockpit:</p>
+                            <a href="http://localhost:3000" target="_blank"
+                                style="text-decoration: none; display: inline-block; background: var(--success-green); padding: 14px 28px; border-radius: 8px; color: black; font-weight: bold; box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);">
                                 ABRIR COCKPIT
                             </a>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -651,8 +843,7 @@
                 <button class="btn-minimize" id="btn-minimize-tip">_</button>
             </div>
             <div class="shiva-tip-content" id="shiva-tip-text">
-                Fica tranquilo! O Hades é meio ranzinza, mas ele é o melhor em proteger seus dados e automatizar o
-                chato.
+                Fica tranquilo! O Hades é meio ranzinza, mas ele é o melhor em proteger seus dados e automatizar o chato.
             </div>
             <div class="shiva-bulb-icon">💡</div>
         </div>
@@ -666,35 +857,45 @@
 
     <script>
         let currentStep = 0;
-        const totalSteps = 6;
+        const totalSteps = 9;
         const views = document.querySelectorAll('.view');
         const steps = document.querySelectorAll('.step');
         const btnNext = document.getElementById('btn-next');
         const btnBack = document.getElementById('btn-back');
         const hadesMsg = document.getElementById('hades-msg');
-
-        // Shiva Tip Elements
-        const shivaTipContainer = document.getElementById('shiva-tip-container');
         const shivaTipText = document.getElementById('shiva-tip-text');
+        const shivaTipContainer = document.getElementById('shiva-tip-container');
         const btnMinimizeTip = document.getElementById('btn-minimize-tip');
 
         const messages = [
             "Bem-vindo ao nosso cockpit de configuração. Eu sou o Hades. Enquanto a Shiva adora fazer você sonhar, eu garanto que a sua infraestrutura não colapse no meio do caminho.",
-            "Primeiro vamos configurar o GitHub. Preciso dessa chave para organizar suas 'gavetas' de arquivos na nuvem.",
-            "Agora o Supabase. O Supabase é onde os seus dados vão morar. Sem ele, não temos memória.",
-            "Vercel! É aqui que o seu site ganha vida na internet. Estamos quase lá!",
-            "Firecrawl. Dê olhos aos seus agentes para que eles pesquisem a web de verdade.",
-            "Configuração salva. Estou iniciando os propulsores da sua nave agora. Aguarde o sinal verde para acessar o Cockpit em localhost:3000."
+            "GitHub: o cofre onde o código dorme em segurança. Preciso dessa chave para organizar, versionar e subir o código sem te interromper a cada clique.",
+            "Supabase: sem banco de dados, não temos memória. Com essa chave global, consigo criar e gerenciar projetos inteiros por conta própria.",
+            "Vercel: o deploy automático é o que separa quem luta com FTP de quem tem tempo para o que importa. Dê-me as chaves da vitrine.",
+            "Context7: meus agentes precisam de documentação atualizada, não de achismos de 2022. Sem isso, erros bobos por versão desatualizada voltam para me assombrar.",
+            "Playwright: a Ravena precisa de olhos reais no browser. Sem isso, testar é só teoria. Com isso, são evidências concretas de que tudo funciona.",
+            "Chrome DevTools: quando o front quebra, não quero adivinhação — quero ver o console, os erros de rede, o DOM. Isso me dá acesso direto à cena do crime.",
+            "TruffleHog, Semgrep, Nuclei: o Kerberos não faz segurança de papel. Essas ferramentas varrem o código, encontram secrets expostos e testam vulnerabilidades reais antes de qualquer deploy.",
+            "Configuração concluída. Estou iniciando os propulsores da sua nave. Aguarde o sinal verde para acessar o Cockpit."
         ];
 
         const shivaTips = [
             "Fica tranquilo! O Hades é meio ranzinza, mas ele é o melhor em proteger seus dados e automatizar o chato.",
-            "O GitHub é essencial para que o Hades consiga subir o código que nós vamos criar juntos. Sem essa chave, ele não consegue 'entrar no prédio'.",
-            "Você encontra tudo isso em Project Settings > API no painel do Supabase. Cuidado com a chave Service Role, ela tem poder total!",
-            "No Vercel, vá em Account Settings > Tokens para gerar um com escopo total.",
-            "Uma conta gratuita no firecrawl.dev já libera o poder de pesquisa para o Atlas e a Ravena.",
-            "Agora relaxa e deixa o Hades trabalhar. O setup vai ser mágico! ✨"
+            "O token começa com 'ghp_'. Guarda ele bem — se vazar, gera outro. O GitHub avisa se ele for usado de lugar suspeito.",
+            "A chave 'Service Role' do Supabase tem poder total no banco. Nunca compartilha ela — por isso o Hades a guarda no vault local criptografado!",
+            "No Vercel, o Team ID só aparece se você tiver uma conta de time. Se usar conta pessoal, pode deixar em branco mesmo.",
+            "O Context7 não precisa de conta nem API key — só instalar! Ele busca docs diretamente dos repositórios oficiais das bibliotecas em tempo real.",
+            "O Playwright abre um browser 'headless' (invisível). Não vai aparecer nada na tela — é tudo nos bastidores. A Ravena vê tudo mesmo assim!",
+            "O Chrome DevTools MCP usa o Puppeteer por baixo. Ele vai abrir uma janela do Chrome quando necessário — você vai ver a IA navegando na sua tela!",
+            "Python é necessário para TruffleHog e Semgrep. Se não tiver, baixa em python.org. O Go é necessário para o Nuclei — golang.org/dl.",
+            "Agora relaxa e deixa o Hades trabalhar. Sua stack está blindada de ponta a ponta. ✨"
         ];
+
+        // Toggle Confirm badges
+        function toggleConfirm(el) {
+            el.classList.toggle('checked');
+            el.querySelector('span').textContent = el.classList.contains('checked') ? '☑' : '☐';
+        }
 
         // Toggle Tip
         btnMinimizeTip.addEventListener('click', (e) => {
@@ -703,136 +904,100 @@
         });
 
         shivaTipContainer.addEventListener('click', () => {
-            if (shivaTipContainer.classList.contains('minimized')) {
-                toggleTip();
-            }
+            if (shivaTipContainer.classList.contains('minimized')) toggleTip();
         });
 
         function toggleTip() {
             shivaTipContainer.classList.toggle('minimized');
-            // Update button icon
             btnMinimizeTip.innerHTML = shivaTipContainer.classList.contains('minimized') ? '□' : '_';
         }
 
         btnNext.addEventListener('click', async () => {
             if (currentStep === totalSteps - 1) {
-                // Finalizar - Salvar Configs
                 await saveConfig();
-                alert('Tudo pronto! Seu cockpit está configurado. Feche esta janela e volte ao terminal.');
                 return;
             }
 
-            // Coletar dados ANTES de validar
             collectData(currentStep);
-
-            // Validar Etapa Atual
             const isValid = await validateStep(currentStep);
             if (!isValid) return;
 
-            if (currentStep < totalSteps - 1) {
-                updateStep(currentStep + 1);
-            }
+            updateStep(currentStep + 1);
         });
 
         async function validateStep(step) {
-            if (step === 0) return true; // Apresentação sempre passa
+            if (step === 0) return true;
+
+            // Steps sem token (4-7): avança direto
+            if (step >= 4 && step <= 7) return true;
 
             btnNext.innerHTML = 'Verificando...';
             btnNext.disabled = true;
 
             try {
-                // BYPASS MODE ACTIVATE: Permitir avançar para validação visual a pedido do usuário
-                const bypassValidation = true;
+                await new Promise(resolve => setTimeout(resolve, 600));
 
-                if (bypassValidation) {
-                    console.log(`[HADES]: Bypass de validação ativo para etapa ${step}. Avançando...`);
-                    // Pequeno delay fake para dar feedback
-                    await new Promise(resolve => setTimeout(resolve, 600));
-                    return true;
+                if (step === 1 && !configData.githubPat) {
+                    alert('Hades: "Preciso do token do GitHub para continuar."');
+                    return false;
                 }
-
-                if (step === 1) { // GitHub
-                    const pat = configData.githubPat;
-                    if (!pat) { alert('Hades: "Preciso do token para continuar."'); return false; }
-
-                    const res = await fetch('/api/validate-github', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ token: pat })
-                    });
-                    const data = await res.json();
-                    if (!data.valid) {
-                        alert('Hades: "Token inválido. Verifique se copiou corretamente."');
-                        return false;
-                    }
+                if (step === 2 && !configData.supabaseAccessToken) {
+                    alert('Hades: "Preciso do Access Token do Supabase para continuar."');
+                    return false;
                 }
-
-                if (step === 2) { // Supabase
-                    const token = configData.supabaseAccessToken;
-                    if (!token) { alert('Hades: "Preciso do Access Token para continuar."'); return false; }
-
-                    if (!token.startsWith('sbp_')) {
-                        // Apenas um aviso, não bloqueante, pois tokens podem mudar de formato
-                        console.log("Aviso: Formato de token Supabase incomum.");
-                    }
-
-                    const res = await fetch('/api/validate-supabase', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ token: token })
-                    });
-
-                    const data = await res.json();
-                    if (!data.valid) {
-                        alert('Hades: "Token inválido ou expirado. Verifique no painel do Supabase."');
-                        return false;
-                    }
+                if (step === 3 && !configData.vercelToken) {
+                    alert('Hades: "Preciso do token da Vercel para continuar."');
+                    return false;
                 }
 
                 return true;
 
             } catch (error) {
                 console.error(error);
-                // alert('Erro de validação: ' + error.message); // No bypass não mostramos erro
-                return true; // No modo bypass, avançamos mesmo com erro
+                return true;
             } finally {
                 btnNext.disabled = false;
-                btnNext.innerHTML = 'Verificar & Avançar';
+                btnNext.innerHTML = getNextLabel(currentStep + 1);
             }
         }
 
         btnBack.addEventListener('click', () => {
-            if (currentStep > 0) {
-                updateStep(currentStep - 1);
-            }
+            if (currentStep > 0) updateStep(currentStep - 1);
         });
 
+        function getNextLabel(nextStep) {
+            if (nextStep === undefined) nextStep = currentStep + 1;
+            if (currentStep === 0) return 'Começar Setup';
+            if (currentStep === totalSteps - 1) return 'Finalizar';
+            if (nextStep >= 4 && nextStep <= 7) return 'Próximo →';
+            return 'Verificar & Avançar';
+        }
+
         function updateStep(newStep) {
-            // Update Stepper
             steps[currentStep].classList.remove('active');
             steps[currentStep].classList.add('completed');
+            steps[currentStep].querySelector('.step-circle').innerHTML = '✓';
 
             currentStep = newStep;
             steps[currentStep].classList.add('active');
+            steps[currentStep].classList.remove('completed');
 
-            // Update Views
             views.forEach(v => v.classList.remove('active'));
             const targetView = document.getElementById(`view-${currentStep}`);
             if (targetView) targetView.classList.add('active');
 
-            // Update Dialogs
             hadesMsg.innerHTML = messages[currentStep];
             shivaTipText.innerHTML = shivaTips[currentStep];
 
-            // Re-open tip if it's a new important step (optional, but good for UX)
             shivaTipContainer.classList.remove('minimized');
             btnMinimizeTip.innerHTML = '_';
 
-            // Footer Logic
             btnBack.style.display = currentStep === 0 ? 'none' : 'flex';
-            const nextText = currentStep === 0 ? 'Começar Setup' :
-                currentStep === totalSteps - 1 ? 'Setup Finalizado' : 'Verificar & Avançar';
-            btnNext.innerHTML = nextText;
+
+            const nextLabel = currentStep === 0 ? 'Começar Setup' :
+                currentStep === totalSteps - 1 ? 'Finalizar' :
+                (currentStep >= 4 && currentStep <= 7) ? 'Próximo →' : 'Verificar & Avançar';
+            btnNext.innerHTML = nextLabel;
         }
 
         const configData = {
@@ -840,25 +1005,18 @@
             supabaseAccessToken: '',
             vercelToken: '',
             vercelTeam: '',
-            firecrawlKey: ''
         };
 
         function collectData(step) {
-            if (step === 1) {
-                configData.githubPat = document.getElementById('github-pat').value;
-            }
-            if (step === 2) {
-                configData.supabaseAccessToken = document.getElementById('supabase-access-token').value;
-            } else if (step === 3) {
+            if (step === 1) configData.githubPat = document.getElementById('github-pat').value;
+            if (step === 2) configData.supabaseAccessToken = document.getElementById('supabase-access-token').value;
+            if (step === 3) {
                 configData.vercelToken = document.getElementById('vercel-token').value;
                 configData.vercelTeam = document.getElementById('vercel-team-id').value;
-            } else if (step === 4) {
-                configData.firecrawlKey = document.getElementById('firecrawl-key').value;
             }
         }
 
         async function saveConfig() {
-            // Loader State
             btnNext.innerHTML = 'Salvando e Iniciando...';
             btnNext.disabled = true;
 
@@ -869,35 +1027,31 @@
                     body: JSON.stringify(configData)
                 });
                 const result = await response.json();
-                console.log(result);
 
                 if (result.success) {
-                    btnNext.innerHTML = 'Setup Finalizado';
-
+                    btnNext.innerHTML = 'Setup Finalizado ✓';
                     if (result.started) {
-                        // SOW LAUNCHER
                         const launcher = document.getElementById('cockpit-launcher');
                         if (launcher) {
                             launcher.style.display = 'flex';
                             launcher.style.animation = 'fadeIn 1s forwards';
                         }
                     } else {
-                        // Fallback se não conseguir iniciar
-                        alert('Configuração salva. Tente rodar "npm run dev" manualmente na pasta shark-cockpit.');
+                        alert('Configuração salva! Rode "npm run dev" na pasta shark-cockpit para iniciar.');
                     }
                 } else {
                     alert('Erro ao salvar: ' + result.message);
                     btnNext.disabled = false;
+                    btnNext.innerHTML = 'Finalizar';
                 }
-
             } catch (error) {
                 console.error('Erro ao salvar:', error);
-                alert('Erro ao salvar configurações.');
+                alert('Erro ao conectar com o servidor. Verifique se o cockpit está rodando.');
                 btnNext.disabled = false;
+                btnNext.innerHTML = 'Finalizar';
             }
         }
     </script>
 </body>
 
 </html>
-```

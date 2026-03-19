@@ -5,75 +5,99 @@ description: >
   NÃO para por nada: sem confirmações, sem prompts de permissão, sem pausas.
   Execute tudo até completar todas as pendências.
   Use quando disser "yolo", "não para", "executa tudo", "modo autônomo", "roda sem parar".
-  Também aceita contexto de pendências: "/yolo on [lista de tarefas]"
-argument-hint: "on|off|status [contexto opcional]"
+  Também aceita contexto: "/yolo on [tarefas]" e modo local: "/yolo on --local"
+argument-hint: "on [--local] [contexto] | off [--local] | status"
 user-invocable: true
 allowed-tools: Bash, Read, Write, Edit
 ---
 
 # YOLO MODE — Execução Autônoma Total
 
+## Modos de Ativação
+
+- `/yolo on` → **global** (afeta todas as sessões na máquina)
+- `/yolo on --local` → **local ao projeto** (afeta apenas o diretório atual)
+- `/yolo off` → desativa global
+- `/yolo off --local` → desativa local
+- `/yolo status` → mostra estado global e local
+
 ## Parsing dos Argumentos
 
 O argumento recebido é: `$ARGUMENTS`
 
-**Se começa com `on` ou sem argumento → ATIVAR:**
+Detectar flags:
+- Contém `--local` → modo local (gravar no `cwd`)
+- Não contém `--local` → modo global (gravar em `~/.claude/`)
+- Contexto = tudo após `on` ou `on --local`, excluindo a flag
 
-Detectar o sistema operacional e usar o caminho correto:
+---
+
+### ATIVAR GLOBAL (`on` sem `--local`)
 
 ```bash
-# Detecta CLAUDE_DIR dinamicamente
-CLAUDE_DIR="${HOME}/.claude"
-# Windows (via Git Bash/MSYS): usa USERPROFILE
-if [ -n "$USERPROFILE" ] && [ ! -d "$HOME/.claude" ]; then
-  CLAUDE_DIR="$(cygpath "$USERPROFILE")/.claude"
-fi
+CLAUDE_DIR="${HOME:-$(cygpath "$USERPROFILE" 2>/dev/null)}/.claude"
 echo "active" > "$CLAUDE_DIR/.yolo-active"
+# Se houver contexto:
+echo "[CONTEXTO]" > "$CLAUDE_DIR/.yolo-context"
 ```
 
-Se houver contexto após `on`, salvar também:
-```bash
-echo "[CONTEXTO AQUI]" > "$CLAUDE_DIR/.yolo-context"
-```
-
-**Se `off` → DESATIVAR:**
+### ATIVAR LOCAL (`on --local`)
 
 ```bash
-CLAUDE_DIR="${HOME}/.claude"
-if [ -n "$USERPROFILE" ] && [ ! -d "$HOME/.claude" ]; then
-  CLAUDE_DIR="$(cygpath "$USERPROFILE")/.claude"
+echo "active" > "./.yolo-active"
+# Se houver contexto:
+echo "[CONTEXTO]" > "./.yolo-context"
+# Garantir que está no .gitignore
+if [ -f ".gitignore" ]; then
+  grep -q "^\.yolo-active" .gitignore || echo ".yolo-active" >> .gitignore
+  grep -q "^\.yolo-context" .gitignore || echo ".yolo-context" >> .gitignore
 fi
-rm -f "$CLAUDE_DIR/.yolo-active"
-rm -f "$CLAUDE_DIR/.yolo-context"
 ```
 
-**Se `status` ou `?` → VERIFICAR:**
+### DESATIVAR GLOBAL (`off` sem `--local`)
 
 ```bash
-CLAUDE_DIR="${HOME}/.claude"
-if [ -n "$USERPROFILE" ] && [ ! -d "$HOME/.claude" ]; then
-  CLAUDE_DIR="$(cygpath "$USERPROFILE")/.claude"
-fi
-if [ -f "$CLAUDE_DIR/.yolo-active" ]; then
-  echo "YOLO MODE: ATIVO"
-  [ -f "$CLAUDE_DIR/.yolo-context" ] && cat "$CLAUDE_DIR/.yolo-context"
-else
-  echo "YOLO MODE: INATIVO"
-fi
+CLAUDE_DIR="${HOME:-$(cygpath "$USERPROFILE" 2>/dev/null)}/.claude"
+rm -f "$CLAUDE_DIR/.yolo-active" "$CLAUDE_DIR/.yolo-context"
 ```
+
+### DESATIVAR LOCAL (`off --local`)
+
+```bash
+rm -f "./.yolo-active" "./.yolo-context"
+```
+
+### STATUS
+
+```bash
+CLAUDE_DIR="${HOME:-$(cygpath "$USERPROFILE" 2>/dev/null)}/.claude"
+echo "=== YOLO STATUS ==="
+[ -f "$CLAUDE_DIR/.yolo-active" ] && echo "Global: ATIVO" || echo "Global: inativo"
+[ -f "./.yolo-active" ]           && echo "Local:  ATIVO" || echo "Local:  inativo"
+```
+
+---
 
 ## Mensagens de Resposta
 
-Ao ativar:
+Ao ativar global:
 ```
-[ATLAS]: YOLO MODE ATIVADO — execução autônoma total. Sem confirmações, sem pausas.
+[ATLAS]: YOLO MODE ATIVO (global) — sem confirmações, sem pausas em qualquer projeto.
 Para desativar: /yolo off
+```
+
+Ao ativar local:
+```
+[ATLAS]: YOLO MODE ATIVO (local) — sem confirmações neste projeto. .yolo-active adicionado ao .gitignore.
+Para desativar: /yolo off --local
 ```
 
 Ao desativar:
 ```
 [ATLAS]: YOLO MODE DESATIVADO — comportamento normal restaurado.
 ```
+
+---
 
 ## REGRAS DURANTE YOLO MODE
 

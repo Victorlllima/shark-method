@@ -45,12 +45,32 @@ mkdir -p "$INSTALL_DIR/commands"
 mkdir -p "$INSTALL_DIR/agents"
 mkdir -p "$INSTALL_DIR/scripts"
 
+# Criar estrutura de memória do usuário
+USERNAME=$(whoami)
+MEMORY_DIR="$INSTALL_DIR/memory/$USERNAME"
+mkdir -p "$MEMORY_DIR/projects"
+mkdir -p "$MEMORY_DIR/interactions"
+
+USER_DATA_PATH="$MEMORY_DIR/user_data.json"
+if [ ! -f "$USER_DATA_PATH" ]; then
+    cat > "$USER_DATA_PATH" << EOF
+{
+  "name": "$USERNAME",
+  "bio": "",
+  "preferences": {},
+  "current_version": "2.0",
+  "last_update_check": "$(date +%Y-%m-%d)"
+}
+EOF
+fi
+
 echo -e "${YELLOW} Baixando arquivos...${NC}"
 
 download_file "$REPO_URL/config/GEMINI.md" "$INSTALL_DIR/GEMINI.md"
 download_file "$REPO_URL/commands/shark-commands.md" "$INSTALL_DIR/commands/shark-commands.md"
 download_file "$REPO_URL/commands/shark-help.md" "$INSTALL_DIR/commands/shark-help.md"
 download_file "$REPO_URL/commands/shark-status.md" "$INSTALL_DIR/commands/shark-status.md"
+download_file "$REPO_URL/commands/yolo.md" "$INSTALL_DIR/commands/yolo.md"
 download_file "$REPO_URL/agents/shiva.md" "$INSTALL_DIR/agents/shiva.md"
 download_file "$REPO_URL/agents/hades.md" "$INSTALL_DIR/agents/hades.md"
 download_file "$REPO_URL/agents/ravena.md" "$INSTALL_DIR/agents/ravena.md"
@@ -58,6 +78,8 @@ download_file "$REPO_URL/agents/kerberos.md" "$INSTALL_DIR/agents/kerberos.md"
 download_file "$REPO_URL/agents/atlas.md" "$INSTALL_DIR/agents/atlas.md"
 download_file "$REPO_URL/scripts/shark-status.js" "$INSTALL_DIR/scripts/shark-status.js"
 download_file "$REPO_URL/scripts/package.json" "$INSTALL_DIR/scripts/package.json"
+download_file "$REPO_URL/scripts/shark-rename.ps1" "$INSTALL_DIR/scripts/shark-rename.ps1"
+download_file "$REPO_URL/scripts/shark-rename.sh" "$INSTALL_DIR/scripts/shark-rename.sh"
 
 chmod +x "$INSTALL_DIR/scripts/shark-status.js"
 

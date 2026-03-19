@@ -81,6 +81,10 @@ Download-File "$RepoUrl/commands/shark-status.md" "$InstallDir\commands\shark-st
 Download-File "$RepoUrl/commands/shark-version.md" "$InstallDir\commands\shark-version.md"
 Download-File "$RepoUrl/commands/shark-doctor.md" "$InstallDir\commands\shark-doctor.md"
 
+Write-Host " Baixando skills..." -ForegroundColor Yellow
+New-Item -ItemType Directory -Force -Path "$InstallDir\skills\yolo" | Out-Null
+Download-File "$RepoUrl/skills/yolo/SKILL.md" "$InstallDir\skills\yolo\SKILL.md"
+
 # Instalar CLAUDE.md apenas se não existir
 $ClaudeMdPath = "$InstallDir\CLAUDE.md"
 if (-not (Test-Path $ClaudeMdPath)) {

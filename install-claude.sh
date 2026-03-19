@@ -81,6 +81,10 @@ download_file "$REPO_URL/commands/shark-status.md" "$INSTALL_DIR/commands/shark-
 download_file "$REPO_URL/commands/shark-version.md" "$INSTALL_DIR/commands/shark-version.md"
 download_file "$REPO_URL/commands/shark-doctor.md" "$INSTALL_DIR/commands/shark-doctor.md"
 
+echo -e "${YELLOW} Baixando skills...${NC}"
+mkdir -p "$INSTALL_DIR/skills/yolo"
+download_file "$REPO_URL/skills/yolo/SKILL.md" "$INSTALL_DIR/skills/yolo/SKILL.md"
+
 # Instalar CLAUDE.md apenas se não existir (não sobrescrever config personalizada)
 CLAUDE_MD="$INSTALL_DIR/CLAUDE.md"
 if [ ! -f "$CLAUDE_MD" ]; then

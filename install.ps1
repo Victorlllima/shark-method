@@ -26,6 +26,24 @@ New-Item -ItemType Directory -Force -Path "$InstallDir\agents" | Out-Null
 New-Item -ItemType Directory -Force -Path "$InstallDir\scripts" | Out-Null
 New-Item -ItemType Directory -Force -Path "$InstallDir\recipes" | Out-Null
 
+# Criar estrutura de memória do usuário
+$Username = $env:USERNAME
+$MemoryDir = "$InstallDir\memory\$Username"
+New-Item -ItemType Directory -Force -Path "$MemoryDir\projects" | Out-Null
+New-Item -ItemType Directory -Force -Path "$MemoryDir\interactions" | Out-Null
+
+$UserDataPath = "$MemoryDir\user_data.json"
+if (-not (Test-Path $UserDataPath)) {
+    $UserData = @{
+        name = $Username
+        bio = ""
+        preferences = @{}
+        current_version = "2.0"
+        last_update_check = (Get-Date -Format "yyyy-MM-dd")
+    } | ConvertTo-Json -Depth 3
+    $UserData | Out-File $UserDataPath -Encoding UTF8
+}
+
 Write-Host " Baixando arquivos..." -ForegroundColor Yellow
 
 function Download-File {
@@ -54,6 +72,7 @@ Download-File "$RepoUrl/version.json" "$InstallDir\version.json"
 Download-File "$RepoUrl/commands/shark-commands.md" "$InstallDir\commands\shark-commands.md"
 Download-File "$RepoUrl/commands/shark-help.md" "$InstallDir\commands\shark-help.md"
 Download-File "$RepoUrl/commands/shark-status.md" "$InstallDir\commands\shark-status.md"
+Download-File "$RepoUrl/commands/yolo.md" "$InstallDir\commands\yolo.md"
 Download-File "$RepoUrl/agents/shiva.md" "$InstallDir\agents\shiva.md"
 Download-File "$RepoUrl/agents/hades.md" "$InstallDir\agents\hades.md"
 Download-File "$RepoUrl/agents/ravena.md" "$InstallDir\agents\ravena.md"
@@ -61,6 +80,8 @@ Download-File "$RepoUrl/agents/kerberos.md" "$InstallDir\agents\kerberos.md"
 Download-File "$RepoUrl/agents/atlas.md" "$InstallDir\agents\atlas.md"
 Download-File "$RepoUrl/scripts/shark-status.js" "$InstallDir\scripts\shark-status.js"
 Download-File "$RepoUrl/scripts/package.json" "$InstallDir\scripts\package.json"
+Download-File "$RepoUrl/scripts/shark-rename.ps1" "$InstallDir\scripts\shark-rename.ps1"
+Download-File "$RepoUrl/scripts/shark-rename.sh" "$InstallDir\scripts\shark-rename.sh"
 Download-File "$RepoUrl/docs/receitas/setup-local-docker.md" "$InstallDir\recipes\setup-local-docker.md"
 Download-File "$RepoUrl/docs/receitas/setup-mcp-supabase.md" "$InstallDir\recipes\setup-mcp-supabase.md"
 Download-File "$RepoUrl/docs/receitas/setup-mcp-github.md" "$InstallDir\recipes\setup-mcp-github.md"

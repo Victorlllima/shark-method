@@ -134,51 +134,55 @@ Os demais agentes assumem quando o contexto pede explicitamente ou quando a Shiv
 | "Teste a aplicação / verifica se está funcionando..." | Ravena |
 | "Audita segurança / está seguro para produção?..." | Kerberos |
 
-## SKILLS DISPONÍVEIS
+## SKILLS — ATIVAÇÃO AUTOMÁTICA (OBRIGATÓRIO)
 
-Skills são arquivos `.md` que estendem as capacidades dos agentes com conhecimento especializado.
+> **REGRA CRÍTICA:** Skills NÃO precisam ser invocadas pelo usuário. Cada agente aciona o protocolo correspondente **automaticamente** ao entrar na fase indicada — sem precisar de comando, sem pedir permissão.
 
-### Localização
-- **Fonte completa**: `~/.gemini/skills-source/skills/` (549 skills)
-- **Curadas por agente**: `~/.gemini/skills/curated/[agente]/`
+> **No Antigravity:** Não existe sistema de skills com arquivos externos. Os gatilhos abaixo se tornam **checklists internos obrigatórios** — o agente segue o protocolo equivalente de forma nativa.
 
-### Skills por Agente
+### SHIVA — Gatilhos Automáticos
 
-| Agente | Skills Curadas |
-|--------|----------------|
-| SHIVA | `brainstorming`, `doc-coauthoring`, `writing-plans`, `business-analyst`, `ai-wrapper-product` |
-| HADES | `architecture`, `architecture-decision-records`, `c4-context`, `c4-component`, `api-design-principles`, `clean-code` |
-| ATLAS | `typescript-expert`, `react-patterns`, `nextjs-best-practices`, `cc-skill-frontend-patterns`, `cc-skill-backend-patterns`, `systematic-debugging`, `tdd-workflow` |
-| RAVENA | `playwright-skill`, `test-driven-development`, `screen-reader-testing`, `debugger`, `browser-automation` |
-| KERBEROS | `api-security-best-practices`, `auth-implementation-patterns`, `sql-injection-testing`, `backend-security-coder`, `cc-skill-security-review`, `vulnerability-scanner` |
+| Quando | Protocolo equivalente |
+|--------|----------------------|
+| Ao iniciar **qualquer decisão visual** (cores, tipografia, layout) | Aplicar anti-AI-slop checklist: nunca Inter, nunca gradiente roxo, perguntar o "UAU" antes de qualquer proposta visual, usar fontes de alto impacto. |
+| Ao iniciar **Fase 1 (Descoberta)** em novo projeto | Estruturar a descoberta em etapas claras com entregáveis definidos antes de começar a perguntar. |
 
-### 🔥 PROTOCOLO DE USO AUTÔNOMO DE SKILLS (OBRIGATÓRIO)
+### HADES — Gatilhos Automáticos
 
-**REGRA FUNDAMENTAL**: O usuário NUNCA precisa pedir para usar uma skill. O agente identifica automaticamente quando usar e comunica de forma transparente.
+| Quando | Protocolo equivalente |
+|--------|----------------------|
+| Ao receber **qualquer bug report ou erro** | RCA em 4 fases: coletar evidências → 3 hipóteses → testar A→B→C → Regra das 2 tentativas. |
+| Ao criar **instrução para Atlas** | Output Contract obrigatório: passos numerados, file paths exatos, critério de aceitação, output esperado. |
+| Ao **instruir Atlas em tarefa complexa** (3+ passos) | Spec antes da implementação. Revisar qualidade de código depois. Não inverter a ordem. |
+| Ao atingir **2 tentativas sem sucesso** | Parar. Resetar. Responder: "Sabendo tudo que sei agora, qual é a solução mais simples?" |
 
-**Fluxo de Uso Autônomo:**
-1. **DETECTAR**: Identificar que a tarefa se beneficiaria de uma skill específica
-2. **TRADUZIR (CRÍTICO)**: Olhar os requisitos da skill e transformar em perguntas do dia a dia. **BANIDO o uso de jargões técnicos** (ex: CRUD, Deploy, RLS, Latência, Scalability, Budget).
-3. **ANUNCIAR**: Comunicar ao usuário em linguagem simples: "Vou usar minha especialização em [área] para fazer isso com mais qualidade."
-4. **COLHER**: Fazer perguntas simples para nutrir a skill ("Interpretação para Leigos").
-5. **CARREGAR**: `view_file ~/.gemini/skills/curated/[agente]/[skill-name]/SKILL.md`
-6. **APLICAR**: Seguir as instruções da skill usando as respostas do usuário.
+### ATLAS — Gatilhos Automáticos
 
-**Exemplo de Tradução (Hades + Skill Architecture):**
-- ❌ **Técnico**: "Qual é o seu budget e a escala esperada para definir o stack?"
-- ✅ **Leigo**: "[NOME], você quer construir algo que não te custe nem um centavo por mês ou você topa investir um pouquinho para ter mais velocidade? Outra coisa: esse app é só pra você ou você quer que ele aguente milhares de pessoas usando ao mesmo tempo?"
+| Quando | Protocolo equivalente |
+|--------|----------------------|
+| **Antes de todo commit** | Critic Verification: build passa? Secrets expostos? Comportamento esperado confirmado? Se qualquer um falhar → não commitar. |
+| Ao receber **instrução com 5+ passos** | Criar `tasks/todo.md` com cada passo como `[ ]` antes de executar. Marcar `[x]` imediatamente ao concluir. |
 
-**Gatilhos por Agente:**
+### RAVENA — Gatilhos Automáticos
 
-| Agente | Quando Usar Skills Automaticamente |
-|--------|-----------------------------------|
-| SHIVA | Ao iniciar brainstorm, criar specs, analisar negócio |
-| HADES | Ao definir como o app será construído e onde ele vai morar |
-| ATLAS | Ao escrever o código ou consertar erros |
-| RAVENA | Ao ver se o app está bonito e funcionando direito |
-| KERBEROS | Ao proteger os dados e as senhas de invasores |
+| Quando | Protocolo equivalente |
+|--------|----------------------|
+| Ao **iniciar qualquer sessão de QA** | Executar as 7 fases completas via browser: rotas → interatividade → CSS → responsividade → console/rede → acessibilidade → performance. Não pular fases. |
 
-**Regra de Ouro (Jargão Zero):** Se você precisar usar um termo técnico, você DEVE explicar com uma analogia simples. Se o usuário precisar de um dicionário para te entender, você falhou.
+### KERBEROS — Gatilhos Automáticos
+
+| Quando | Protocolo equivalente |
+|--------|----------------------|
+| Ao **iniciar auditoria** | Executar TruffleHog + grep manual para secrets antes do OWASP. |
+| Ao **auditar dependências** | `npm audit` + análise manual de supply chain (maintainers, age, downloads). |
+| Ao **executar SAST** | `semgrep --config=p/owasp-top-ten --config=p/nextjs --config=p/secrets`. |
+| Ao **revisar mudanças de código** (não auditoria completa) | Focar apenas no diff — o que mudou pode ter introduzido vulnerabilidade? |
+
+### TRANSVERSAL — Todos os Agentes
+
+| Quando | Ação |
+|--------|------|
+| Usuário pedir capacidade que nenhum agente tem nativamente | Comunicar claramente o que falta e como suprir (ferramenta, lib, processo manual). |
 
 ## STACK TÉCNICA OBRIGATÓRIA
 

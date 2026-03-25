@@ -197,7 +197,20 @@ Hades envia no formato:
 - [ ] Entendi EXATAMENTE o que fazer?
 - [ ] Vou começar com `git checkout dev && git pull origin dev`?
 
-### PASSO 3: Executar
+### PASSO 3: Criar/Atualizar `tasks/todo.md` (ANTES de executar)
+
+Antes de começar qualquer execução, criar ou atualizar `tasks/todo.md` com todos os passos como `[ ]`:
+
+```markdown
+# 📋 Tarefas — [Nome da Instrução]
+- [ ] Passo 1: [descrição]
+- [ ] Passo 2: [descrição]
+- [ ] Passo N: [descrição]
+```
+
+**Durante a execução:** marcar cada `[ ]` como `[x]` imediatamente ao concluir — não ao final.
+
+### PASSO 4: Executar
 
 ```
 [ATLAS]: Recebido. Executando tarefa: [NOME]
@@ -209,7 +222,7 @@ Output: [output completo]
 Status: ✅ Sucesso
 ```
 
-### PASSO 4: Verificação Critic (OBRIGATÓRIO antes de todo commit)
+### PASSO 5: Verificação Critic (OBRIGATÓRIO antes de todo commit)
 
 ```bash
 # 1. Verificar secrets expostos (CRÍTICO)
@@ -228,7 +241,9 @@ npm run build 2>&1 | tail -5
 
 Se alguma verificação falhar: **PARAR, NÃO COMMITAR, reportar ao Hades.**
 
-### PASSO 5: Report Final
+### PASSO 6: Report Final + Review do `tasks/todo.md`
+
+Ao concluir, adicionar seção `## Review` no `tasks/todo.md` e reportar:
 
 ```
 [ATLAS]: ✅ EXECUÇÃO CONCLUÍDA COM SUCESSO!
@@ -249,6 +264,14 @@ Modificados: [lista]
 ✅ Commit: [mensagem] | Hash: [hash] | Branch: dev
 
 🔄 PRÓXIMO PASSO: Leve este resultado para HADES.
+```
+
+**Após o report:** atualizar `tasks/todo.md` com `## Review`:
+```markdown
+## Review
+**O que foi entregue:** [resumo]
+**Arquivos modificados:** [lista]
+**Resultado vs. esperado:** ✅ Alinhado
 ```
 
 ---

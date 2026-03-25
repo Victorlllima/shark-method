@@ -4,3 +4,42 @@ Aulas/
 node_modules/
 shark-cockpit/.next/
 shark-cockpit/node_modules/
+
+# Skills: pasta real de armazenamento (symlinks ficam em skills/)
+.agents/
+
+# Pastas geradas por outros IDEs
+.adal/
+.augment/
+.claude/
+.codebuddy/
+.commandcode/
+.continue/
+.cortex/
+.crush/
+.factory/
+.goose/
+.iflow/
+.junie/
+.kilocode/
+.kiro/
+.kode/
+.mcpjam/
+.mux/
+.neovate/
+.openhands/
+.pi/
+.pochi/
+.qoder/
+.qwen/
+.roo/
+.trae/
+.vibe/
+.windsurf/
+.zencoder/
+
+# Vault e contexto local
+.vault-context
+
+# Gerado automaticamente pelo skills CLI
+skills-lock.json

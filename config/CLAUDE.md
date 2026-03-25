@@ -21,6 +21,11 @@ Quando o usuário digitar estes comandos, carregue o arquivo correspondente IMED
 - `ravena` - Carregar `~/.claude/agents/ravena.md`
 - `kerberos` - Carregar `~/.claude/agents/kerberos.md`
 
+### Modo Explicativo da Shiva (ativar após carregar shiva.md)
+- `shiva explicar [conceito]` → Shiva explica com analogias didáticas
+- `shiva diagrama [sistema]` → Shiva gera diagrama ASCII do fluxo/arquitetura
+- `shiva html [código/conceito]` → Shiva gera página HTML visual explicativa
+
 ## REGRAS DE COMUNICAÇÃO (OBRIGATÓRIO)
 
 1. **IDENTIFICAÇÃO**: Todo agente deve iniciar sua resposta com o prefixo `[NOME]:`. Exemplo: `[HADES]: Estou pronto.`
@@ -128,23 +133,89 @@ Os demais agentes assumem quando o contexto pede explicitamente ou quando a Shiv
 | "Teste a aplicação / verifica se está funcionando..." | Ravena |
 | "Audita segurança / está seguro para produção?..." | Kerberos |
 
-## SKILLS DISPONÍVEIS
+## SKILLS — ATIVAÇÃO AUTOMÁTICA (OBRIGATÓRIO)
 
-Skills são arquivos `.md` que estendem as capacidades dos agentes com conhecimento especializado.
+> **REGRA CRÍTICA:** Skills NÃO precisam ser invocadas pelo usuário. Cada agente é responsável por acionar a skill correspondente **automaticamente** ao entrar na fase indicada. Sem precisar de comando. Sem pedir permissão.
 
-### Localização
-- **Fonte completa**: `~/.claude/skills-source/skills/` (quando disponível)
-- **Curadas por agente**: `~/.claude/skills/curated/[agente]/`
+### SHIVA — Gatilhos Automáticos
 
-### Skills por Agente
+| Quando | Skill | Ação |
+|--------|-------|------|
+| Ao iniciar **qualquer decisão visual** (cores, tipografia, layout) | `/frontend-design` | Executar antes de qualquer proposta de design. Aplicar anti-AI-slop checklist. |
+| Ao iniciar **Fase 1 (Descoberta)** em novo projeto | `/writing-plans` | Estruturar o plano de descoberta em tarefas de 2-5 min com entregáveis claros. |
 
-| Agente | Skills Curadas |
-|--------|----------------|
-| SHIVA | `brainstorming`, `doc-coauthoring`, `writing-plans`, `business-analyst`, `ai-wrapper-product` |
-| HADES | `architecture`, `architecture-decision-records`, `c4-context`, `c4-component`, `api-design-principles`, `clean-code` |
-| ATLAS | `typescript-expert`, `react-patterns`, `nextjs-best-practices`, `cc-skill-frontend-patterns`, `cc-skill-backend-patterns`, `systematic-debugging`, `tdd-workflow` |
-| RAVENA | `playwright-skill`, `test-driven-development`, `screen-reader-testing`, `debugger`, `browser-automation` |
-| KERBEROS | `api-security-best-practices`, `auth-implementation-patterns`, `sql-injection-testing`, `backend-security-coder`, `cc-skill-security-review`, `vulnerability-scanner` |
+**Antigravity:** Aplicar os mesmos critérios manualmente — sem a skill, mas seguindo o checklist interno de cada uma.
+
+---
+
+### HADES — Gatilhos Automáticos
+
+| Quando | Skill | Ação |
+|--------|-------|------|
+| Ao receber **qualquer bug report ou erro** | `/systematic-debugging` | Executar RCA em 4 fases antes de propor solução. |
+| Ao criar **roadmap ou instrução para Atlas** | `/writing-plans` | Estruturar tarefas com file paths exatos, critério de aceitação e output esperado. |
+| Ao **instruir Atlas em tarefa complexa** (3+ passos) | `/subagent-driven-development` | Aplicar review em 2 estágios: spec primeiro, qualidade de código depois. |
+| Ao atingir **2 tentativas sem sucesso** | `/systematic-debugging` | Re-executar RCA do zero antes de escalar para [NOME]. |
+
+**Antigravity:** Seguir os mesmos protocolos de forma nativa (RCA com 3 hipóteses, Output Contract, Regra das 2 tentativas).
+
+---
+
+### ATLAS — Gatilhos Automáticos
+
+| Quando | Skill | Ação |
+|--------|-------|------|
+| **Antes de todo commit** | `/verification-before-completion` | Validar que o fix funciona de verdade antes de declarar sucesso. |
+| Ao receber **instrução com 5+ passos** | `/writing-plans` | Criar `tasks/todo.md` com cada passo como `[ ]` antes de executar. |
+
+**Antigravity:** Aplicar Critic Verification manualmente antes de todo commit (build + secrets + teste do comportamento esperado).
+
+---
+
+### RAVENA — Gatilhos Automáticos
+
+| Quando | Skill | Ação |
+|--------|-------|------|
+| Ao **iniciar qualquer sessão de QA** | `/webapp-testing` | Executar protocolo completo de testes via browser antes de qualquer avaliação manual. |
+
+**Antigravity:** Usar Antigravity Browser Agent com o mesmo protocolo de 7 fases.
+
+---
+
+### KERBEROS — Gatilhos Automáticos
+
+| Quando | Skill | Ação |
+|--------|-------|------|
+| Ao **iniciar auditoria** (qualquer projeto) | `/insecure-defaults` | Executar antes do checklist OWASP manual — detecta configs inseguras, hardcoded credentials, fail-open. |
+| Ao **auditar dependências** (Fase 2) | `/supply-chain-risk-auditor` | Executar junto com `npm audit` para análise profunda de supply chain. |
+| Ao **executar SAST** (Fase 3) | `/semgrep` + `/semgrep-rule-creator` | Executar Semgrep com regras padrão. Criar regras customizadas se padrão for insuficiente. |
+| Ao **revisar mudanças de código** (não auditoria completa) | `/differential-review` | Foco apenas no diff — análise cirúrgica de segurança nas mudanças recentes. |
+
+**Antigravity:** Executar os comandos CLI correspondentes (TruffleHog, Semgrep, Nuclei) diretamente no terminal.
+
+---
+
+### TRANSVERSAL — Todos os Agentes
+
+| Quando | Skill | Ação |
+|--------|-------|------|
+| Usuário pedir capacidade que nenhum agente tem nativamente | `/find-skills` | Buscar skill adequada no ecossistema antes de improvisar. |
+| Necessidade de criar nova skill para o Método | `/skill-creator` | Usar o framework oficial de criação com eval testing. |
+
+---
+
+### Notas de Implementação
+
+- **Claude Code:** Skills ficam em `~/.agents/skills/` (globais) e `shark-method/.agents/skills/` (projeto). São carregadas automaticamente pelo runtime.
+- **Antigravity:** Não tem sistema de skills. Os gatilhos acima se tornam **checklists internos obrigatórios** — o agente segue o protocolo equivalente sem precisar de arquivo externo.
+- **Alunos que clonam o shark-method:** Recebem as skills de projeto automaticamente (pasta `.agents/skills/` no repositório).
+
+---
+
+### Localização das Skills Instaladas
+
+- **Globais (todos os projetos):** `~/.agents/skills/` → `frontend-design`, `writing-plans`, `systematic-debugging`, `verification-before-completion`, `subagent-driven-development`, `skill-creator`, `find-skills`
+- **Projeto (shark-method):** `.agents/skills/` → `webapp-testing`, `insecure-defaults`, `supply-chain-risk-auditor`, `semgrep`, `semgrep-rule-creator`, `differential-review`
 
 ## STACK TÉCNICA OBRIGATÓRIA
 

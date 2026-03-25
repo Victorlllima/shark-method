@@ -162,6 +162,10 @@ Os demais agentes assumem quando o contexto pede explicitamente ou quando a Shiv
 |--------|----------------------|
 | **Antes de todo commit** | Critic Verification: build passa? Secrets expostos? Comportamento esperado confirmado? Se qualquer um falhar → não commitar. |
 | Ao receber **instrução com 5+ passos** | Criar `tasks/todo.md` com cada passo como `[ ]` antes de executar. Marcar `[x]` imediatamente ao concluir. |
+| Ao **redigir mensagem de commit** | Aplicar Conventional Commits: `tipo(escopo): descrição` com body detalhado se necessário. |
+| Ao **criar PR ou issue no GitHub** | Usar `gh pr create` / `gh issue create` com título e body estruturados. |
+| Ao **trabalhar com Stripe** | Validar webhook signature, usar idempotency keys, nunca hardcodar preços. |
+| Ao **trabalhar com PostgreSQL/Neon** | Usar connection pooling, evitar `SELECT *`, preferir prepared statements. |
 
 ### RAVENA — Gatilhos Automáticos
 

@@ -167,6 +167,10 @@ Os demais agentes assumem quando o contexto pede explicitamente ou quando a Shiv
 |--------|-------|------|
 | **Antes de todo commit** | `/verification-before-completion` | Validar que o fix funciona de verdade antes de declarar sucesso. |
 | Ao receber **instrução com 5+ passos** | `/writing-plans` | Criar `tasks/todo.md` com cada passo como `[ ]` antes de executar. |
+| Ao **redigir mensagem de commit** | `/git-commit` | Aplicar Conventional Commits com escopo correto e body detalhado. |
+| Ao **criar PR, issue ou usar CLI do GitHub** | `/gh-cli` | Usar comandos `gh` corretos para operações no GitHub. |
+| Ao **trabalhar com Stripe** (pagamentos, webhooks, planos) | `/stripe-best-practices` | Garantir integração segura e idiomática com Stripe. |
+| Ao **trabalhar com Neon/Supabase PostgreSQL** | `/neon-postgres` | Usar padrões corretos para serverless Postgres (pool, branches, etc). |
 
 **Antigravity:** Aplicar Critic Verification manualmente antes de todo commit (build + secrets + teste do comportamento esperado).
 
@@ -214,7 +218,14 @@ Os demais agentes assumem quando o contexto pede explicitamente ou quando a Shiv
 
 ### Localização das Skills Instaladas
 
-- **Globais (todos os projetos):** `~/.agents/skills/` → `frontend-design`, `writing-plans`, `systematic-debugging`, `verification-before-completion`, `subagent-driven-development`, `skill-creator`, `find-skills`
+- **Globais (todos os projetos):** `~/.agents/skills/` →
+  - Design: `frontend-design`, `tailwind-design-system`, `ui-ux-pro-max`, `web-design-guidelines`, `web-typography`, `refactoring-ui`
+  - Planning: `writing-plans`, `subagent-driven-development`, `executing-plans`, `dispatching-parallel-agents`, `using-git-worktrees`
+  - Debugging: `systematic-debugging`, `verification-before-completion`, `receiving-code-review`, `requesting-code-review`, `second-opinion`
+  - Dev Tools: `git-commit`, `gh-cli`, `test-driven-development`, `finishing-a-development-branch`
+  - Infra/Backend: `neon-postgres`, `stripe-best-practices`, `playwright-best-practices`, `web-asset-generator`
+  - Security: `agentic-actions-auditor`, `ffuf-web-fuzzing`, `seo-audit`
+  - Skills Meta: `skill-creator`, `find-skills`
 - **Projeto (shark-method):** `.agents/skills/` → `webapp-testing`, `insecure-defaults`, `supply-chain-risk-auditor`, `semgrep`, `semgrep-rule-creator`, `differential-review`
 
 ## STACK TÉCNICA OBRIGATÓRIA

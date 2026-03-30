@@ -96,6 +96,71 @@ if (-not (Test-Path $ClaudeMdPath)) {
     Write-Host " Para atualizar: baixe manualmente de $RepoUrl/config/CLAUDE.md" -ForegroundColor Yellow
 }
 
+# ========================================
+#  CONFIGURAÇÃO DO ANTIGRAVITY IDE
+# ========================================
+
+$AntigravityCmd = Get-Command antigravity -ErrorAction SilentlyContinue
+
+if ($AntigravityCmd) {
+    Write-Host " Antigravity detectado — configurando extensões..." -ForegroundColor Yellow
+
+    # Verificar se Claude Code está instalado
+    $ccInstalled = & antigravity --list-extensions 2>$null | Select-String "anthropic.claude"
+    if (-not $ccInstalled) {
+        Write-Host "   Instalando extensão Claude Code..." -ForegroundColor Yellow
+        & antigravity --install-extension anthropic.claude-code 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Host "   Claude Code instalado." -ForegroundColor Green
+        } else {
+            Write-Host "   Falha ao instalar Claude Code. Instale manualmente no Antigravity." -ForegroundColor Red
+        }
+    } else {
+        Write-Host "   Claude Code já instalado." -ForegroundColor Green
+    }
+
+    # Instalar auto-run-command
+    $arcInstalled = & antigravity --list-extensions 2>$null | Select-String "synedra.auto-run-command"
+    if (-not $arcInstalled) {
+        Write-Host "   Instalando extensão auto-run-command..." -ForegroundColor Yellow
+        & antigravity --install-extension synedra.auto-run-command 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Host "   auto-run-command instalado." -ForegroundColor Green
+        } else {
+            Write-Host "   Falha ao instalar auto-run-command. Instale manualmente no Antigravity." -ForegroundColor Red
+        }
+    } else {
+        Write-Host "   auto-run-command já instalado." -ForegroundColor Green
+    }
+
+    # Configurar settings.json do Antigravity
+    $AgSettingsPath = "$env:APPDATA\Antigravity\User\settings.json"
+    if (Test-Path $AgSettingsPath) {
+        $settings = Get-Content $AgSettingsPath -Raw | ConvertFrom-Json
+    } else {
+        New-Item -ItemType Directory -Force -Path "$env:APPDATA\Antigravity\User" | Out-Null
+        $settings = [PSCustomObject]@{}
+    }
+
+    # Adicionar regra de auto-open do Claude Code se não existir
+    if (-not ($settings.PSObject.Properties.Name -contains "auto-run-command.rules")) {
+        $settings | Add-Member -NotePropertyName "auto-run-command.rules" -NotePropertyValue @(
+            [PSCustomObject]@{
+                condition = "always"
+                command   = "claude-vscode.editor.open"
+            }
+        )
+        $settings | ConvertTo-Json -Depth 10 | Out-File $AgSettingsPath -Encoding UTF8
+        Write-Host "   Auto-open do Claude Code configurado." -ForegroundColor Green
+    } else {
+        Write-Host "   Configuração de auto-open já existe." -ForegroundColor Green
+    }
+
+} else {
+    Write-Host " Antigravity não encontrado no PATH — pulando configuração da IDE." -ForegroundColor Yellow
+    Write-Host "   Instale o Antigravity e rode o instalador novamente, ou configure manualmente." -ForegroundColor Yellow
+}
+
 Write-Host ""
 Write-Host " Instalação concluída!" -ForegroundColor Green
 Write-Host ""
@@ -106,10 +171,10 @@ Write-Host ""
 Write-Host " Instalado em: $InstallDir" -ForegroundColor Yellow
 Write-Host ""
 Write-Host " TESTAR AGORA:" -ForegroundColor Yellow
-Write-Host "   1. Abra o Claude Code (VS Code, Cursor, terminal)"
-Write-Host "   2. Digite: shiva"
-Write-Host "   3. A Shiva vai se apresentar como arquiteta de produto"
-Write-Host "   4. Se funcionar, está pronto!"
+Write-Host "   1. Abra o Antigravity IDE"
+Write-Host "   2. O Claude Code abrirá automaticamente"
+Write-Host "   3. Digite: shiva"
+Write-Host "   4. A Shiva vai se apresentar como arquiteta de produto"
 Write-Host ""
 Write-Host " Para atualizar depois: shark update" -ForegroundColor Yellow
 Write-Host ""

@@ -186,6 +186,36 @@ Os demais agentes assumem quando o contexto pede explicitamente ou quando a Shiv
 
 ---
 
+### KERBEROS — Workflow de Auditoria em 3 Fases
+
+O Kerberos executa auditorias em 3 fases sequenciais — **nunca pula etapas**:
+
+**FASE 1 — Detecção de Stack**
+Antes de qualquer análise, mapear as tecnologias do projeto:
+- Verificar `package.json`, `requirements.txt`, `go.mod`, etc.
+- Identificar: linguagem, framework frontend, backend, banco de dados, infra
+- Reportar: "Stack detectada: React + Supabase + Node.js + ..."
+
+**FASE 2 — Busca de Skills de Boas Práticas**
+Com a stack mapeada, usar `/find-skills` para cada tecnologia:
+- Executar `/find-skills <tecnologia> security` para cada item principal
+- Instalar/ativar as skills encontradas antes de prosseguir
+- Usar as boas práticas como checklist de referência na Fase 3
+
+**FASE 3 — Pentest na Codebase**
+Com contexto das boas práticas, executar análise focada em:
+- **Código:** SQL Injection, XSS, CSRF, IDOR, secrets expostos, supply chain
+- **Banco:** RLS em tabelas sensíveis, políticas corretas, `SECURITY DEFINER` sem validação
+- **Infra:** Headers HTTP (CSP, HSTS), CORS não `*` em produção, rate limiting
+
+**Formato de entrega:**
+- 🔴 CRÍTICO — bloqueia deploy
+- 🟠 ALTO — corrigir antes de produção
+- 🟡 MÉDIO — corrigir em breve
+- 🟢 BAIXO — melhoria recomendada
+
+---
+
 ### KERBEROS — Gatilhos Automáticos
 
 | Quando | Skill | Ação |

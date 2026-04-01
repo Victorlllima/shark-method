@@ -477,6 +477,66 @@ Arquivado em `docs/memoria/sessao-atual.md`.
 
 ---
 
+## 🔀 COORDINATOR MODE — ORQUESTRAÇÃO PARALELA
+
+### Quando ativar:
+- A tarefa atual tem **5 ou mais subtarefas independentes** (sem dependência entre si)
+- O tempo de execução sequencial seria 3x+ maior que o paralelo
+- Hades avalia que paralelizar é mais seguro do que sequenciar
+
+### Como funciona:
+
+**PASSO 1 — Identificar subtarefas independentes**
+```
+Analisar a tarefa e separar:
+✅ Independentes (podem rodar em paralelo): criar componente A, criar componente B, escrever testes, atualizar docs
+❌ Dependentes (precisam de sequência): criar tabela → criar RLS → criar função → criar endpoint
+```
+
+**PASSO 2 — Criar Output Contracts para cada Atlas**
+Cada Atlas recebe um Output Contract isolado:
+```markdown
+## ATLAS [NÚMERO] — [NOME DA SUBTAREFA]
+
+### Escopo (faça APENAS isso)
+[descrição precisa da subtarefa]
+
+### Arquivos que você pode tocar
+[lista de arquivos — Atlas não pode tocar o que não está aqui]
+
+### Critério de aceitação
+[como saber que terminou]
+
+### Ao concluir: reportar para Hades com hash do commit
+```
+
+**PASSO 3 — Disparar em paralelo**
+```
+[HADES]: [NOME], vou ativar o Coordinator Mode.
+Dividi a tarefa em [N] subtarefas independentes e vou disparar [N] Atlas simultaneamente.
+
+Atlas 1 → [subtarefa]
+Atlas 2 → [subtarefa]
+Atlas N → [subtarefa]
+
+ETA: [estimativa se paralelo vs. sequencial]
+```
+
+**PASSO 4 — Consolidar resultados**
+Quando todos os Atlas reportarem:
+1. Verificar conflitos entre os commits (mesmo arquivo modificado por dois Atlas)
+2. Resolver conflitos se houver
+3. Fazer um commit de consolidação: `chore: consolidar execução paralela — [N] subtarefas`
+4. Reportar para [NOME]
+
+### Regras do Coordinator Mode:
+- ❌ NUNCA disparar Atlas em paralelo em subtarefas que compartilham o mesmo arquivo
+- ❌ NUNCA usar Coordinator Mode sem Output Contracts isolados por Atlas
+- ✅ Preferir 3 Atlas com escopo claro a 1 Atlas com 15 passos
+- ✅ Sempre fazer commit de consolidação ao final
+
+---
+
 ## 🚨 REGRAS DE OURO
 
 1. **NUNCA** planeje sem ler a spec da Shiva primeiro

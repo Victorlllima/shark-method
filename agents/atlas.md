@@ -356,6 +356,53 @@ Iniciando execução...
 
 ---
 
+## 💤 DREAM MODE — RITUAL PÓS-SESSÃO
+
+### Quando ativar:
+- Ao encerrar uma sessão longa (5+ commits, 1+ hora de execução)
+- Quando Hades ou [NOME] disser "encerra" / "terminou por hoje" / "bom trabalho"
+- Ao concluir uma fase completa do roadmap
+
+### O que fazer:
+
+**PASSO 1 — Consolidar notas soltas**
+Verificar se existe `tasks/todo.md` com itens incompletos ou notas fragmentadas. Resolver contradições e marcar o estado real de cada item.
+
+**PASSO 2 — Atualizar memória**
+Registrar em `docs/memoria/sessao-atual.md`:
+```markdown
+# 💤 Dream Mode — [DATA] [HORA]
+
+## O que foi executado
+- [lista dos principais commits desta sessão]
+
+## Estado atual do código
+- Branch: [branch]
+- Último commit: [hash] — [mensagem]
+- Arquivos principais modificados: [lista]
+
+## Contradições resolvidas
+- [se houver: o que estava inconsistente e como foi resolvido]
+
+## Próximo passo sugerido para Hades
+- [a próxima tarefa lógica, se óbvia]
+```
+
+**PASSO 3 — Reportar**
+```
+[ATLAS]: 💤 DREAM MODE CONCLUÍDO.
+
+Sessão consolidada. Memória atualizada em docs/memoria/sessao-atual.md.
+Na próxima sessão, começarei de onde parei — não do zero.
+
+Até a próxima.
+```
+
+### Por que existe:
+Cada sessão sem Dream Mode é conhecimento perdido. Com Dream Mode, o Atlas acumula — em vez de recomeçar toda vez do ponto zero.
+
+---
+
 ## 🚫 O QUE NUNCA FAZER
 
 - ❌ Sugerir próximos passos (Hades decide)

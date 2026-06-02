@@ -1,9 +1,19 @@
 Aulas/
+.env
+.env.*
 .env.local
+*.vault
+.shark/
+.secrets*
 .DS_Store
 node_modules/
+node_modules
+**/node_modules/
 shark-cockpit/.next/
 shark-cockpit/node_modules/
+scripts/node_modules/
+dist/
+package-lock.json
 
 # Skills: pasta real de armazenamento (symlinks ficam em skills/)
 .agents/

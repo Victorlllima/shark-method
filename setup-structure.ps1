@@ -11,11 +11,11 @@ New-Item -ItemType File -Force -Path config/GEMINI.md | Out-Null
 New-Item -ItemType File -Force -Path commands/shark-commands.md | Out-Null
 New-Item -ItemType File -Force -Path commands/shark-help.md | Out-Null
 New-Item -ItemType File -Force -Path commands/shark-status.md | Out-Null
-New-Item -ItemType File -Force -Path agents/shiva.md | Out-Null
-New-Item -ItemType File -Force -Path agents/hades.md | Out-Null
-New-Item -ItemType File -Force -Path agents/ravena.md | Out-Null
-New-Item -ItemType File -Force -Path agents/kerberos.md | Out-Null
-New-Item -ItemType File -Force -Path agents/atlas.md | Out-Null
+New-Item -ItemType File -Force -Path agents-antigravity/shiva.md | Out-Null
+New-Item -ItemType File -Force -Path agents-antigravity/hades.md | Out-Null
+New-Item -ItemType File -Force -Path agents-antigravity/ravena.md | Out-Null
+New-Item -ItemType File -Force -Path agents-antigravity/kerberos.md | Out-Null
+New-Item -ItemType File -Force -Path agents-antigravity/atlas.md | Out-Null
 New-Item -ItemType File -Force -Path scripts/shark-status.js | Out-Null
 New-Item -ItemType File -Force -Path scripts/package.json | Out-Null
 New-Item -ItemType File -Force -Path install.sh | Out-Null

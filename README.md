@@ -1,126 +1,82 @@
+<h1 align="center">🦈 Método S.H.A.R.K.</h1>
+
 <p align="center">
-  <a href="https://tailwindcss.com" target="_blank">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/tailwindlabs/tailwindcss/HEAD/.github/logo-dark.svg">
-      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/tailwindlabs/tailwindcss/HEAD/.github/logo-light.svg">
-      <img alt="Tailwind CSS" src="https://raw.githubusercontent.com/tailwindlabs/tailwindcss/HEAD/.github/logo-light.svg" width="350" height="70" style="max-width: 100%;">
-    </picture>
-  </a>
+  <strong>Uma equipe de 5 agentes de IA que automatiza a sua empresa.</strong><br>
+  Você não aprende a programar. Você comanda especialistas que constroem por você.
 </p>
 
 <p align="center">
-  A utility-first CSS framework for rapidly building custom user interfaces.
-</p>
-
-<p align="center">
-    <a href="https://github.com/tailwindlabs/tailwindcss/actions"><img src="https://img.shields.io/github/actions/workflow/status/tailwindlabs/tailwindcss/ci.yml?branch=next" alt="Build Status"></a>
-    <a href="https://www.npmjs.com/package/tailwindcss"><img src="https://img.shields.io/npm/dt/tailwindcss.svg" alt="Total Downloads"></a>
-    <a href="https://github.com/tailwindcss/tailwindcss/releases"><img src="https://img.shields.io/npm/v/tailwindcss.svg" alt="Latest Release"></a>
-    <a href="https://github.com/tailwindcss/tailwindcss/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/tailwindcss.svg" alt="License"></a>
+  <em>Edição Empresário · v4.0</em>
 </p>
 
 ---
 
-## Documentation
+## O que é
 
-For full documentation, visit [tailwindcss.com](https://tailwindcss.com).
+O **Método S.H.A.R.K.** transforma a IA do seu editor em uma **equipe nomeada de 5 especialistas**, cada um com função, personalidade e skills curadas. Em vez de uma IA genérica que faz tudo mais ou menos, você ganha cinco que fazem cada coisa bem — e conversam entre si seguindo um fluxo de trabalho profissional.
 
-## Community
+O foco não é virar programador. É ser o **dono que automatiza o próprio negócio**: você descreve a dor (o processo que te trava), e a equipe arquiteta, constrói, testa e protege a solução — falando com você em linguagem de negócio, não em jargão técnico.
 
-For help, discussion about best practices, or feature ideas:
+## A equipe
 
-[Discuss Tailwind CSS on GitHub](https://github.com/tailwindcss/tailwindcss/discussions)
+| Agente | Papel | O que faz por você |
+|--------|-------|--------------------|
+| 💡 **SHIVA** | Líder & Arquiteta de Produto | Conduz a descoberta pela **dor**, desenha a solução e o visual, prioriza o que entra na 1ª versão. É quem **lidera e convoca os outros**. |
+| 🔥 **HADES** | Estrategista Técnico | Transforma a visão num plano de execução claro — e te explica o que cada etapa significa pro seu negócio. |
+| ⚙️ **ATLAS** | Executor | Constrói o que foi planejado e te mostra **funcionando** — sem encher você de terminal. |
+| 🔍 **RAVENA** | QA | Testa como se fosse o seu cliente mais exigente. Garante que **não vai quebrar na frente de quem importa**. |
+| 🛡️ **KERBEROS** | Segurança | Audita se é seguro antes de você botar os dados dos seus clientes no ar. Se alguém conseguir invadir, ele trava. |
 
-## Contributing
+> O fluxo: **S**hiva especifica → **H**ades planeja → **A**tlas executa → **R**avena revisa → **K**erberos protege.
 
-If you're interested in contributing to Tailwind CSS, please read our [contributing docs](https://github.com/tailwindcss/tailwindcss/blob/next/.github/CONTRIBUTING.md) **before submitting a pull request**.
+## Os 2 pacotes
+
+O método vem em duas edições — mesmo núcleo, ferramentas afinadas pro seu ambiente:
+
+- **`agents-antigravity/`** — para quem usa as **IAs nativas do Google Antigravity** (constituição `GEMINI.md`, memória em `~/.gemini/`).
+- **`agents-claude/`** — para quem roda a **extensão Claude Code dentro do Antigravity** (constituição `CLAUDE.md`, memória em `~/.claude/`, skills e subagents).
+
+A personalidade e o fluxo S→H→A→R→K são idênticos nos dois. Só mudam as ferramentas, os caminhos e o arquivo de constituição.
+
+## Instalação (Windows · PowerShell)
+
+**Antigravity nativo:**
+```powershell
+irm https://raw.githubusercontent.com/Victorlllima/shark-method/main/install.ps1 | iex
+```
+
+**Extensão Claude Code no Antigravity** ⭐ recomendado:
+```powershell
+irm https://raw.githubusercontent.com/Victorlllima/shark-method/main/install-claude.ps1 | iex
+```
+
+**Mac / Linux (Terminal):**
+```bash
+# Antigravity nativo
+curl -fsSL https://raw.githubusercontent.com/Victorlllima/shark-method/main/install.sh | bash
+# Extensão Claude Code
+curl -fsSL https://raw.githubusercontent.com/Victorlllima/shark-method/main/install-claude.sh | bash
+```
+
+Depois de instalar, abra a IDE e digite **`shiva`** — a líder se apresenta e conduz a partir daí.
+
+## O diferencial
+
+Qualquer um ensina "use IA pra programar". O Método S.H.A.R.K. entrega **5 agentes nomeados, com personalidade e skills curadas, que já chegam treinados** — a Ravena já sabe testar, o Kerberos já sabe auditar. Você não configura nada. É uma equipe pronta, não um chat genérico.
+
+## Estrutura do repositório
+
+```
+agents-antigravity/   → os 5 agentes (edição Antigravity nativo)
+agents-claude/        → os 5 agentes (edição Claude Code)
+commands/             → comandos /shark-*
+config/               → constituições GEMINI.md e CLAUDE.md
+docs/receitas/        → receitas black-box (vault, ferramentas, setup)
+install*.ps1 / .sh    → instaladores
+```
 
 ---
 
-## `@tailwindcss/postcss` plugin API
-
-### Changing where the plugin searches for source files
-
-You can use the `base` option (defaults to the current working directory) to change the directory in which the plugin searches for source files:
-
-```js
-import tailwindcss from "@tailwindcss/postcss"
-
-export default {
- plugins: [
-  tailwindcss({
-    base: path.resolve(__dirname, "./path")
-  })
- ]
-}
-```
-
-### Enabling or disabling Lightning CSS
-
-By default, this plugin detects whether or not the CSS is being built for production by checking the `NODE_ENV` environment variable. When building for production Lightning CSS will be enabled otherwise it is disabled.
-
-If you want to always enable or disable Lightning CSS the `optimize` option may be used:
-
-```js
-import tailwindcss from '@tailwindcss/postcss'
-
-export default {
-  plugins: [
-    tailwindcss({
-      // Enable or disable Lightning CSS
-      optimize: false,
-    }),
-  ],
-}
-```
-
-It's also possible to keep Lightning CSS enabled but disable minification:
-
-```js
-import tailwindcss from '@tailwindcss/postcss'
-
-export default {
-  plugins: [
-    tailwindcss({
-      optimize: { minify: false },
-    }),
-  ],
-}
-```
-
-### Enabling or disabling `url(…)` rewriting
-
-Our PostCSS plugin can rewrite `url(…)`s for you since it also handles `@import` (no `postcss-import` is needed). This feature is enabled by default.
-
-In some situations the bundler or framework you're using may provide this feature itself. In this case you can set `transformAssetUrls` to `false` to disable this feature:
-
-```js
-import tailwindcss from '@tailwindcss/postcss'
-
-export default {
-  plugins: [
-    tailwindcss({
-      // Disable `url(…)` rewriting
-      transformAssetUrls: false,
-
-      // Enable `url(…)` rewriting (the default)
-      transformAssetUrls: true,
-    }),
-  ],
-}
-```
-
-You may also pass options to `optimize` to enable Lighting CSS but prevent minification:
-
-```js
-import tailwindcss from '@tailwindcss/postcss'
-
-export default {
-  plugins: [
-    tailwindcss({
-      // Enables Lightning CSS but disables minification
-      optimize: { minify: false },
-    }),
-  ],
-}
-```
+<p align="center">
+  Feito por <strong>RedPro AI Academy</strong> · Método S.H.A.R.K. 🦈
+</p>

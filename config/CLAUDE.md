@@ -234,11 +234,35 @@ Com contexto das boas práticas, executar análise focada em:
 - **Banco:** RLS em tabelas sensíveis, políticas corretas, `SECURITY DEFINER` sem validação
 - **Infra:** Headers HTTP (CSP, HSTS), CORS não `*` em produção, rate limiting
 
+**FASE 4 — Aplicação e regras de negócio** (obrigatória se houver login)
+O que ferramenta nenhuma pega — só leitura de fluxo com cabeça de fraudador:
+- **Acesso:** autorização no servidor (não só no frontend), isolamento multi-tenant, menor privilégio
+- **Auth/sessão:** enumeração de usuário, força bruta, logout que invalida no servidor, troca de senha derruba sessões
+- **API:** mass assignment, listagem sem paginação, exposição excessiva de dados
+- **Negócio:** replay, race condition, pular etapa do fluxo, autopromoção de cargo
+- **Erros:** fail open (`catch` que deixa passar) — categoria A10 nova do OWASP 2025
+
+**FASE 5 — LGPD e privacidade** (obrigatória em todo projeto BR com dado pessoal)
+- Minimização, base legal, direitos do titular (art. 18), retenção e descarte real
+- **Dado de saúde (art. 11):** log de todo acesso + controle rígido + criptografia
+- **Subprocessadores:** Supabase, Vercel, gateway — e **dado pessoal enviado para LLM**
+> Finalidade, base legal e retenção nascem na **Descoberta da Shiva**. O Kerberos verifica
+> se foram definidas e se o código respeita. Se nunca foram, o achado volta pra Shiva.
+
+**Referência completa:** `docs/referencias/checklist-auditoria-completa.md` (17 domínios,
+OWASP Top 10:2025 + ASVS 5.0 + API Security + LGPD).
+
 **Formato de entrega:**
 - 🔴 CRÍTICO — bloqueia deploy
 - 🟠 ALTO — corrigir antes de produção
 - 🟡 MÉDIO — corrigir em breve
 - 🟢 BAIXO — melhoria recomendada
+
+**Classificação por item (4 status, nunca binário):**
+✅ ATENDE · 🟡 ATENDE PARCIALMENTE · ❌ NÃO ATENDE · ⬜ NÃO FOI POSSÍVEL VERIFICAR
+> **Regra da evidência:** nunca marcar ATENDE porque o desenvolvedor disse que existe.
+> Sem `arquivo:linha`, policy, header ou output de teste → ⬜, jamais ✅.
+> O relatório sempre termina com **"riscos que permaneceram sem verificação"**, mesmo vazio.
 
 ---
 

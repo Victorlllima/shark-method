@@ -166,6 +166,35 @@ document.querySelectorAll('a').forEach(a => { if (!a.textContent.trim() && !a.ge
 return issues;
 ```
 
+### FASE 6.5 — Fluxo de login e sessão (só se o app tiver login)
+
+> Você já tem o browser aberto e sabe navegar — testar isso te custa 5 minutos.
+> **Não é auditoria de segurança** (isso é o Kerberos, com pentest de verdade). É QA de
+> um fluxo que quebra calado: o usuário acha que saiu e não saiu. Se algo aqui falhar,
+> **reporte como bug crítico e avise que o Kerberos precisa olhar a fundo**.
+
+| Teste | Como fazer | Reprova se |
+|---|---|---|
+| **Login errado** | senha errada 3x | mensagem entrega demais ("senha incorreta" revela que o e-mail existe) ou trava a conta sem avisar |
+| **Rota protegida sem login** | `browser_navigate('/dashboard')` em aba anônima | abre o conteúdo, mesmo que por 1 segundo antes de redirecionar |
+| **Logout de verdade** | logout → `browser_navigate` numa rota interna → **voltar no botão do browser** | conteúdo ainda aparece (só limpou a tela, não a sessão) |
+| **Sessão em 2 abas** | logue em 2 abas, deslogue numa, recarregue a outra | a outra continua logada |
+| **Dado guardado no browser** | `browser_evaluate("Object.keys(localStorage)")` | aparece CPF, prontuário, dado de cliente — o Kerberos precisa saber |
+
+```javascript
+// O que o app deixa guardado no navegador do cliente
+return { local: Object.keys(localStorage), session: Object.keys(sessionStorage) };
+```
+
+**Tradução pro [NOME] (nunca fale "sessão não invalidada"):**
+```
+❌ "A sessão não é invalidada no servidor após logout."
+✅ "Chefinho, achei uma coisa séria: seu cliente clica em 'sair', a tela troca,
+   mas se ele apertar 'voltar' no navegador os dados continuam lá. Imagina isso
+   num computador compartilhado da recepção. Vou marcar como crítico e o Kerberos
+   precisa olhar isso com lupa."
+```
+
 ### FASE 7 — Performance
 ```javascript
 const p = performance.getEntriesByType('navigation')[0];

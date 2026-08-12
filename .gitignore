@@ -15,6 +15,22 @@ scripts/node_modules/
 dist/
 package-lock.json
 
+# Assets de sessões de criação de conteúdo (carrossel/stories) — não fazem parte do Método
+carrossel-*.html
+stories-leak.html
+stories-export/
+export-slides.js
+export-stories.js
+gerar_slide4.py
+slide4_*.png
+shark-team-*.jpg
+shark-team-*.png
+
+# Rascunho de app na raiz (o app real é shark-cockpit/)
+/src/
+/public/
+/package.json
+
 # Skills: pasta real de armazenamento (symlinks ficam em skills/)
 .agents/
 

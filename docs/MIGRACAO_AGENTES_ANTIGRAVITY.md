@@ -127,10 +127,10 @@ Apenas remoção de referências a Claude Code (Read/Write tools) e substituiç�
 
 ## Integração RVM — O que vai para os alunos?
 
-**A integração RVM é exclusiva do ambiente de Red** (via rvm-listener na rede Tailscale).
+**A integração RVM é exclusiva do ambiente de Red** (via rvm-listener no servidor privado, acessível apenas por túnel SSH).
 
 Os alunos **não têm acesso** a:
-- `http://100.64.77.5:4000` (API privada de Red)
+- `http://localhost:4000` (API privada de Red — porta bloqueada para a internet, exige túnel SSH)
 - rvm-listener.js
 - project_shark_state / shark_handoffs (tabelas privadas)
 
@@ -209,3 +209,23 @@ Nenhuma mudança necessária — os scripts já baixam os 5 agentes corretamente
 | Ravena | `~/.claude/agents/ravena.md` | `shark-method/agents/ravena.md` |
 | Kerberos | `~/.claude/agents/kerberos.md` | `shark-method/agents/kerberos.md` |
 | Config global | `~/.claude/CLAUDE.md` | `shark-method/config/GEMINI.md` |
+
+---
+
+## ⚠️ Tailscale descontinuado (2026-08-04)
+
+O Tailscale foi **removido** da infraestrutura (purge executado no servidor). Os IPs `100.64.77.5` (servidor) e `100.69.142.117` (máquina local) estão **mortos** — qualquer referência a eles é legado e não funciona.
+
+- **SSH:** `ssh -i <CHAVE_SSH> root@<IP_SERVIDOR>`
+- **Banco/APIs internas:** portas bloqueadas para a internet. Acesso apenas via **túnel SSH**:
+  ```bash
+  ssh -i <CHAVE_SSH> -L 4000:localhost:4000 root@<IP_SERVIDOR>
+  ```
+- Nunca reintroduzir `100.64.77.5`, `100.69.142.117`, `100.64.0.0/10` ou dependência de VPN Tailscale neste projeto.
+
+> 🔐 **`<IP_SERVIDOR>` fica no vault, nunca neste arquivo.** Este repositório é público —
+> IP de servidor em repo aberto é alvo de scan e brute force de SSH em horas.
+> ```bash
+> node ~/.claude/vault/vault-read.js --vault=hetzner-redpro ssh_host_public
+> ```
+> `<CHAVE_SSH>` é o caminho da chave privada na máquina local (fora do repo, nunca versionada).

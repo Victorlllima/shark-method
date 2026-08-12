@@ -1,0 +1,51 @@
+{
+  "_comment": "Exemplo de settings.json com hooks de enforcement do Método S.H.A.R.K. — Plug-and-play. Copie para ~/.claude/settings.json e ajuste paths.",
+  "_protocolo": "docs/protocolos/plugins-por-agente.md",
+  "_versao": "1.0",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "_descricao": "Hook 1 — Bloqueia git push para main sem aprovação dupla (Ravena + Kerberos)",
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ~/.shark/hooks/block-main-push.js"
+          }
+        ]
+      },
+      {
+        "_descricao": "Hook 3 — Enforce skill whitelist por agente",
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ~/.shark/hooks/enforce-agent-skill-whitelist.js"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "_descricao": "Hook 2 — Dispara /security-review automaticamente ao editar arquivos sensíveis",
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ~/.shark/hooks/trigger-security-review.js"
+          }
+        ]
+      },
+      {
+        "_descricao": "Hook 4 — Log de QA da Ravena para observabilidade",
+        "matcher": "mcp__playwright__.*|mcp__chrome-devtools__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ~/.shark/hooks/log-qa-activity.js"
+          }
+        ]
+      }
+    ]
+  }
+}
